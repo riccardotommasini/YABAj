@@ -8,6 +8,7 @@ import it.polimi.yaba.model.User;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -46,6 +47,12 @@ public class FellowshipManagerService extends ModelManagerService<Fellowship> {
 
         fellowship.setKey(key);
         return fellowship;
+    }
+
+    @Override
+    public JSONObject generateJson(Object obj) {
+        throw new RuntimeException(
+            "generateJson method for fellowship not implemented");
     }
 
     @Override

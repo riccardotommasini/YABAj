@@ -7,6 +7,7 @@ import it.polimi.yaba.model.Place;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -54,6 +55,12 @@ public class CoordinateManagerService extends ModelManagerService<Coordinate> {
     public List<Coordinate> search(String query) {
         throw new RuntimeException(
             "search method for coordinates not implemented");
+    }
+
+    @Override
+    public JSONObject generateJson(Object obj) {
+        throw new RuntimeException(
+            "generateJson method for coordinates not implemented");
     }
 
     public boolean exists(Float latitude, Float longitude) {

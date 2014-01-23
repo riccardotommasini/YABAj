@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -80,6 +81,12 @@ public class UserManagerService extends ModelManagerService<User> {
             }
         }
         return users;
+    }
+
+    @Override
+    public JSONObject generateJson(Object obj) {
+        throw new RuntimeException(
+            "generateJson method for user not implemented");
     }
 
     public boolean exists(String username) {

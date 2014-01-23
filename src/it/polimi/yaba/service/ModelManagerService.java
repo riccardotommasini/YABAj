@@ -3,6 +3,7 @@ package it.polimi.yaba.service;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.datastore.EntityNotFoundRuntimeException;
 import org.slim3.datastore.ModelMeta;
@@ -10,8 +11,8 @@ import org.slim3.datastore.ModelMeta;
 import com.google.appengine.api.datastore.Key;
 
 public abstract class ModelManagerService<T> {
-    private Class<T> type;
-    private ModelMeta<T> meta;
+    private final Class<T> type;
+    private final ModelMeta<T> meta;
 
     public ModelManagerService(Class<T> type, ModelMeta<T> meta) {
         this.type = type;
@@ -51,5 +52,7 @@ public abstract class ModelManagerService<T> {
      * @return list of object matching the query for search purpose
      */
     abstract public List<T> search(String query);
+
+    public abstract JSONObject generateJson(Object obj);
 
 }

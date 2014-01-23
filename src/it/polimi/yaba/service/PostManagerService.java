@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -65,6 +66,12 @@ public class PostManagerService extends ModelManagerService<Post> {
     @Override
     public List<Post> match(String query) {
         throw new RuntimeException("match method for posts not implemented");
+    }
+
+    @Override
+    public JSONObject generateJson(Object obj) {
+        throw new RuntimeException(
+            "generateJson method for post not implemented");
     }
 
     @Override

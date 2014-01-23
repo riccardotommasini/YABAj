@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -79,6 +80,16 @@ public class ProductManagerService extends ModelManagerService<Product> {
             }
         }
         return products;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public JSONObject generateJson(Object obj) {
+        JSONObject json = new JSONObject();
+        Product product = (Product) obj;
+        json.put("type", product.getClass().getSimpleName());
+        json.put("name", product.getName());
+        return json;
     }
 
     public boolean exists(String name) {

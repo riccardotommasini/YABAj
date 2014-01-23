@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
@@ -78,6 +79,16 @@ public class ShopManagerService extends ModelManagerService<Shop> {
             }
         }
         return shops;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public JSONObject generateJson(Object obj) {
+        JSONObject json = new JSONObject();
+        Shop shop = (Shop) obj;
+        json.put("type", shop.getClass().getSimpleName());
+        json.put("name", shop.getName());
+        return json;
     }
 
     public boolean exists(String name) {

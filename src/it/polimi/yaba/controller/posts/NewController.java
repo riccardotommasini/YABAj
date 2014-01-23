@@ -76,25 +76,25 @@ public class NewController extends YABAController {
                     break;
                 }
             }
+            // if no such place exist, create it
+            if (place == null) {
+                debug(this, "place '"
+                    + asString("place")
+                    + "' exists only within a shop");
+                place =
+                    createNewPlace(
+                        asString("place"),
+                        asFloat("latitude"),
+                        asFloat("longitude"));
+            }
             debug(this, "place '" + place.getName() + "' selected");
         } else {
             // new place in users's coordinates
-            map = new HashMap<String, Object>();
-            map.put("name", asString("place"));
-            place = placeManager.create(map);
-            debug(this, "place '" + asString("place") + "' created");
-            map = new HashMap<String, Object>();
-            map.put("latitude", asFloat("latitude"));
-            map.put("longitude", asFloat("longitude"));
-            map.put("place", place.getKey());
-            coordinateManager.create(map);
-            debug(this, "coordinates ("
-                + asFloat("latitude")
-                + ", "
-                + asFloat("longitude")
-                + ") for: '"
-                + asString("place")
-                + "' created");
+            place =
+                createNewPlace(
+                    asString("place"),
+                    asFloat("latitude"),
+                    asFloat("longitude"));
         }
 
         Product product = null;
@@ -112,10 +112,7 @@ public class NewController extends YABAController {
             if (!productExists) {
                 // create the product but not referenced to the shop
                 debug(this, "product NOT exists in shop");
-                map = new HashMap<String, Object>();
-                map.put("name", asString("product"));
-                product = productManager.create(map);
-                debug(this, "product '" + asString("product") + "' created");
+                product = createNewProduct(asString("product"));
             } else {
                 debug(this, "product '"
                     + product.getName()
@@ -132,13 +129,16 @@ public class NewController extends YABAController {
                     break;
                 }
             }
+            // if no such product exist, create it
+            if (product == null) {
+                debug(this, "product '"
+                    + asString("product")
+                    + "' exists only within a shop");
+                product = createNewProduct(asString("product"));
+            }
             debug(this, "product '" + product.getName() + "' selected");
         } else {
-            // add new product
-            map = new HashMap<String, Object>();
-            map.put("name", asString("product"));
-            product = productManager.create(map);
-            debug(this, "product '" + asString("product") + "' created");
+            product = createNewProduct(asString("product"));
         }
 
         FileItem formImgDef = requestScope("cameraInput");
@@ -156,5 +156,35 @@ public class NewController extends YABAController {
         postManager.create(map);
 
         return redirect("/users/profile?username=" + user.getUsername());
+    }
+
+    private Product createNewProduct(String productName) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", productName);
+        Product product = productManager.create(map);
+        debug(this, "product '" + productName + "' created");
+        return product;
+    }
+
+    private Place createNewPlace(String placeName, Float latitude,
+            Float longitude) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", placeName);
+        Place place = placeManager.create(map);
+        debug(this, "place '" + placeName + "' created");
+
+        map = new HashMap<String, Object>();
+        map.put("latitude", latitude);
+        map.put("longitude", longitude);
+        map.put("place", place.getKey());
+        coordinateManager.create(map);
+        debug(this, "coordinates ("
+            + asFloat("latitude")
+            + ", "
+            + asFloat("longitude")
+            + ") for: '"
+            + placeName
+            + "' created");
+        return place;
     }
 }

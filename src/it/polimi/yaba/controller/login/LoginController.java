@@ -28,7 +28,7 @@ public class LoginController extends YABAController {
             } else {
                 return reportErrors("wrong username or password");
             }
-        } else if (shopManager.exist(name)) {
+        } else if (shopManager.exists(name)) {
             Shop shop = shopManager.select(name);
             if (shop.getPassword().equals(sha1(password))) {
                 RequestLocator.get().getSession().setAttribute("shop", shop);

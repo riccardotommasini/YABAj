@@ -37,7 +37,6 @@ public class ShopManagerService extends ModelManagerService<Shop> {
         if (shop.getImageRef() != null) {
 
             Image i = (Image) rawData.get("imageRef");
-            System.out.println("Image not null");
             shop.getImageRef().setModel(i);
         }
         Transaction transaction = Datastore.beginTransaction();
@@ -79,7 +78,7 @@ public class ShopManagerService extends ModelManagerService<Shop> {
         return shops;
     }
 
-    public boolean exist(String name) {
+    public boolean exists(String name) {
         Shop shop =
             Datastore
                 .query(ShopMeta.get())

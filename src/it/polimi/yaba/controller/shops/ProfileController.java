@@ -23,16 +23,20 @@ public class ProfileController extends YABAController {
             return reportErrors("requested shop not found!");
         }
         Shop shop = shopManager.select(request.getParameter("name"));
-        if (shop == null) {
-            return reportErrors("requested shop not found!");
-        }
         if (RequestLocator.get().getSession().getAttribute("shop") != null) {
             Shop sessionShop =
                 (Shop) RequestLocator.get().getSession().getAttribute("shop");
-            if (sessionShop.getName().equals(shop.getName())) {
+            if (shop == null) {
+                // new shops are eventually consistent
+                shop = sessionShop;
+            } else if (sessionShop.getName().equals(shop.getName())) {
                 RequestLocator.get().getSession().setAttribute("shop", shop);
             }
         }
+        if (shop == null) {
+            return reportErrors("requested shop not found!");
+        }
+
         boolean isFollower = false;
         List<Fellowship> followers = shop.getFollowers();
         if (RequestLocator.get().getSession().getAttribute("user") != null) {

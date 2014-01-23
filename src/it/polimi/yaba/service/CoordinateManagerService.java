@@ -57,23 +57,23 @@ public class CoordinateManagerService extends ModelManagerService<Coordinate> {
     }
 
     public boolean exists(Float latitude, Float longitude) {
-        Coordinate coordinate =
+        List<Coordinate> coordinates =
             Datastore
                 .query(CoordinateMeta.get())
                 .filter(CoordinateMeta.get().latitude.equal(latitude))
                 .filter(CoordinateMeta.get().longitude.equal(longitude))
-                .asSingle();
-        return coordinate != null;
+                .asList();
+        return !coordinates.isEmpty();
     }
 
-    public Coordinate select(Float latitude, Float longitude) {
-        Coordinate coordinate =
+    public List<Coordinate> select(Float latitude, Float longitude) {
+        List<Coordinate> coordinates =
             Datastore
                 .query(CoordinateMeta.get())
                 .filter(CoordinateMeta.get().latitude.equal(latitude))
                 .filter(CoordinateMeta.get().longitude.equal(longitude))
-                .asSingle();
-        return coordinate;
+                .asList();
+        return coordinates;
     }
 
     public Coordinate selectNearest(Float latitude, Float longitude) {

@@ -54,9 +54,16 @@
 		<div class="col-xs-12 col-sm-6 col-md-3">
 			<div class="jumbotron">
 				<p><strong><fmt:formatDate value="${post.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-				<p>
-					<strong>Product:</strong> ${f:h(post.product.name)}
-					<strong>at:</strong> ${f:h(post.productPrice)} &euro;
+				<p><strong>Product:</strong>
+					<c:choose>
+						<c:when test="${post.product.shop != null}">
+							<a href="/shops/profile?name=${f:h(post.product.shop.name)}">
+								${f:h(post.product.name)}</a>
+						</c:when>
+						<c:otherwise>
+							${f:h(post.product.name)}
+						</c:otherwise>
+					</c:choose>
 				</p>
 				<c:if test="${post.image != null}">
 					<div align="center">
@@ -64,6 +71,7 @@
 						<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
 					</div>
 				</c:if>
+				<p><strong>Price:</strong> ${f:h(post.productPrice)} &euro;</p>
 				<c:choose>
 					<c:when test="${f:h(post.place.shop.name != null)}">
 						<p>

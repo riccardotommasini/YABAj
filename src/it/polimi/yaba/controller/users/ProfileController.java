@@ -35,8 +35,7 @@ public class ProfileController extends YABAController {
             if (user == null) {
                 // new user are eventually consistent
                 user = sessionUser;
-            }
-            if (sessionUser.getUsername().equals(user.getUsername())) {
+            } else if (sessionUser.getUsername().equals(user.getUsername())) {
                 RequestLocator.get().getSession().setAttribute("user", user);
             }
         }
@@ -53,5 +52,4 @@ public class ProfileController extends YABAController {
         requestScope("following", following);
         return forward("profile.jsp");
     }
-
 }

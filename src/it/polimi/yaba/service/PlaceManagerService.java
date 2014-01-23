@@ -77,21 +77,21 @@ public class PlaceManagerService extends ModelManagerService<Place> {
     }
 
     public boolean exists(String name) {
-        Place place =
+        List<Place> places =
             Datastore
                 .query(PlaceMeta.get())
                 .filter(PlaceMeta.get().name.equal(name))
-                .asSingle();
-        return place != null;
+                .asList();
+        return !places.isEmpty();
     }
 
-    public Place select(String name) {
-        Place place =
+    public List<Place> select(String name) {
+        List<Place> places =
             Datastore
                 .query(PlaceMeta.get())
                 .filter(PlaceMeta.get().name.equal(name))
-                .asSingle();
-        return place;
+                .asList();
+        return places;
     }
 
     public Place selectNearest(Float latitude, Float longitude) {

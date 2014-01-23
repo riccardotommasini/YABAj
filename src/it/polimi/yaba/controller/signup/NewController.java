@@ -5,6 +5,7 @@ import it.polimi.yaba.model.Image;
 import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.model.User;
 import it.polimi.yaba.service.ImageManagerService;
+import it.polimi.yaba.service.PlaceManagerService;
 import it.polimi.yaba.service.ShopManagerService;
 import it.polimi.yaba.service.UserManagerService;
 
@@ -19,6 +20,7 @@ import org.slim3.util.RequestLocator;
 public class NewController extends YABAController {
     private static ShopManagerService shopManager = ShopManagerService.get();
     private static UserManagerService userManager = UserManagerService.get();
+    private static PlaceManagerService placeManager = PlaceManagerService.get();
     private static ImageManagerService imageManager = new ImageManagerService();
 
     @Override
@@ -91,7 +93,6 @@ public class NewController extends YABAController {
 
             Image imgDef = null;
             if (requestScope("cameraInput") != null) {
-                debug(this, "photo");
                 FileItem formImgDef = requestScope("cameraInput");
                 imgDef = imageManager.upload(formImgDef);
             }
@@ -104,6 +105,12 @@ public class NewController extends YABAController {
             rawData.put("imageRef", imgDef);
 
             Shop shop = shopManager.create(rawData);
+
+            // create a default place with same name
+            rawData = new HashMap<String, Object>();
+            rawData.put("name", name);
+            rawData.put("shop", shop.getKey());
+            placeManager.create(rawData);
 
             RequestLocator.get().getSession().setAttribute("shop", shop);
             debug(this, "session for shop '" + shop.getName() + "' setted");

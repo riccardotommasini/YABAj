@@ -27,7 +27,7 @@ public class FbloginController extends YABAController {
             wr
                 .executeGet("https://graph.facebook.com/oauth/access_token?client_id="
                     + "639186146139919"
-                    + "&redirect_uri=http://localhost:8888/login/fblogin"
+                    + "&redirect_uri=http://yaba-dmw.appspot.com/login/fblogin"
                     + "&client_secret="
                     + "59579dbe9d714d53aac86ac34b0bcc19"
                     + "&code="

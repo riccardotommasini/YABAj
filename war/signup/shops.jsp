@@ -5,7 +5,6 @@
 
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="pageName" value="New Post" />
-	<jsp:param name="script" value="register" />
 	<jsp:param name="script" value="uploadPreview" />
 </jsp:include>
 

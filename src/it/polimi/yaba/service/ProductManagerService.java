@@ -79,22 +79,22 @@ public class ProductManagerService extends ModelManagerService<Product> {
         return products;
     }
 
-    public boolean exist(String name) {
-        Product product =
+    public boolean exists(String name) {
+        List<Product> products =
             Datastore
                 .query(ProductMeta.get())
                 .filter(ProductMeta.get().name.equal(name))
-                .asSingle();
-        return product != null;
+                .asList();
+        return !products.isEmpty();
     }
 
-    public Product select(String name) {
-        Product product =
+    public List<Product> select(String name) {
+        List<Product> products =
             Datastore
                 .query(ProductMeta.get())
                 .filter(ProductMeta.get().name.equal(name))
-                .asSingle();
-        return product;
+                .asList();
+        return products;
     }
 
 }

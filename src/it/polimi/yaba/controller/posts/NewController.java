@@ -5,6 +5,7 @@ import it.polimi.yaba.meta.PostMeta;
 import it.polimi.yaba.model.Image;
 import it.polimi.yaba.model.Place;
 import it.polimi.yaba.model.Product;
+import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.model.User;
 import it.polimi.yaba.service.CoordinateManagerService;
 import it.polimi.yaba.service.ImageManagerService;
@@ -14,6 +15,7 @@ import it.polimi.yaba.service.ProductManagerService;
 import it.polimi.yaba.service.ShopManagerService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slim3.controller.Navigation;
@@ -54,16 +56,27 @@ public class NewController extends YABAController {
 
         Map<String, Object> map;
         Place place = null;
-        if (shopManager.exist(asString("place"))) {
+        Shop shop = null;
+        if (shopManager.exists(asString("place"))) {
+            shop = shopManager.select(asString("place"));
             // take always first shop's place as default location
-            place = shopManager.select(asString("place")).getPlaces().get(0);
+            place = shop.getPlaces().get(0);
             debug(this, "shop '"
                 + asString("place")
-                + "' exists, shop's place: "
-                + place.getName());
+                + "' exists, shop's place: '"
+                + place.getName()
+                + "'");
         } else if (placeManager.exists(asString("place"))) {
             debug(this, "place '" + asString("place") + "' exists");
-            place = placeManager.select(asString("place"));
+            // select first place not associated with shop
+            List<Place> possiblePlaces = placeManager.select(asString("place"));
+            for (Place p : possiblePlaces) {
+                if (p.getShop() == null) {
+                    place = p;
+                    break;
+                }
+            }
+            debug(this, "place '" + place.getName() + "' selected");
         } else {
             // new place in users's coordinates
             map = new HashMap<String, Object>();
@@ -83,10 +96,43 @@ public class NewController extends YABAController {
                 + asString("place")
                 + "' created");
         }
+
         Product product = null;
-        if (productManager.exist(asString("product"))) {
-            product = productManager.select(asString("product"));
+        if (shop != null) {
+            // first search for product in shops's product
+            List<Product> shopProducts = shop.getProducts();
+            boolean productExists = false;
+            for (Product p : shopProducts) {
+                if (p.getName().equals(asString("product"))) {
+                    product = p;
+                    productExists = true;
+                    break;
+                }
+            }
+            if (!productExists) {
+                // create the product but not referenced to the shop
+                debug(this, "product NOT exists in shop");
+                map = new HashMap<String, Object>();
+                map.put("name", asString("product"));
+                product = productManager.create(map);
+                debug(this, "product '" + asString("product") + "' created");
+            } else {
+                debug(this, "product '"
+                    + product.getName()
+                    + "' exists in shop");
+            }
+        } else if (productManager.exists(asString("product"))) {
             debug(this, "product '" + asString("product") + "' exists");
+            // select first product not associated with shop
+            List<Product> possibleProduct =
+                productManager.select(asString("product"));
+            for (Product p : possibleProduct) {
+                if (p.getShop() == null) {
+                    product = p;
+                    break;
+                }
+            }
+            debug(this, "product '" + product.getName() + "' selected");
         } else {
             // add new product
             map = new HashMap<String, Object>();
@@ -94,10 +140,12 @@ public class NewController extends YABAController {
             product = productManager.create(map);
             debug(this, "product '" + asString("product") + "' created");
         }
+
         FileItem formImgDef = requestScope("cameraInput");
         Image imgDef = imageManager.upload(formImgDef);
         User user =
             (User) RequestLocator.get().getSession().getAttribute("user");
+
         map = new HashMap<String, Object>();
         map.put("text", asString("text"));
         map.put("product", product.getKey());

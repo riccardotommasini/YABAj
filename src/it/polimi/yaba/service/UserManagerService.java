@@ -38,6 +38,7 @@ public class UserManagerService extends ModelManagerService<User> {
             Image i = (Image) rawData.get("imageRef");
             user.getImageRef().setModel(i);
         }
+
         Transaction transaction = Datastore.beginTransaction();
         Key key = Datastore.put(user);
         transaction.commit();

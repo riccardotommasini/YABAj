@@ -12,85 +12,85 @@ import com.google.appengine.api.datastore.ShortBlob;
 @Model
 public class ImageFragment implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Attribute(primaryKey = true)
-	private Key key;
+    @Attribute(primaryKey = true)
+    private Key key;
 
-	@Attribute(lob = true)
-	private byte[] bytes;
+    @Attribute(lob = true)
+    private byte[] bytes;
 
-	private ShortBlob bytes2;
+    private ShortBlob bytes2;
 
-	/**
-	 * @return the bytes2
-	 */
-	public ShortBlob getBytes2() {
-		return bytes2;
-	}
+    /**
+     * @return the bytes2
+     */
+    public ShortBlob getBytes2() {
+        return bytes2;
+    }
 
-	/**
-	 * @param bytes2
-	 *            the bytes2 to set
-	 */
-	public void setBytes2(ShortBlob bytes2) {
-		this.bytes2 = bytes2;
-	}
+    /**
+     * @param bytes2
+     *            the bytes2 to set
+     */
+    public void setBytes2(ShortBlob bytes2) {
+        this.bytes2 = bytes2;
+    }
 
-	private org.slim3.datastore.ModelRef<Image> imageRef = new org.slim3.datastore.ModelRef<Image>(
-			Image.class);
+    private org.slim3.datastore.ModelRef<Image> imageRef =
+        new org.slim3.datastore.ModelRef<Image>(Image.class);
 
-	private int index;
+    private int index;
 
-	/**
-	 * @return the key
-	 */
-	public Key getKey() {
-		return key;
-	}
+    /**
+     * @return the key
+     */
+    public Key getKey() {
+        return key;
+    }
 
-	/**
-	 * @param key
-	 *            the key to set
-	 */
-	public void setKey(Key key) {
-		this.key = key;
-	}
+    /**
+     * @param key
+     *            the key to set
+     */
+    public void setKey(Key key) {
+        this.key = key;
+    }
 
-	/**
-	 * @return the array of bytes
-	 */
-	public byte[] getBytes() {
-		return bytes;
-	}
+    /**
+     * @return the array of bytes
+     */
+    public byte[] getBytes() {
+        return bytes;
+    }
 
-	/**
-	 * @param bytes
-	 *            the array of bytes
-	 */
-	public void setBytes(byte[] bytes) {
-		this.bytes = bytes;
-	}
+    /**
+     * @param bytes
+     *            the array of bytes
+     */
+    public void setBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
 
-	/**
-	 * @param index
-	 *            the index to set
-	 */
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    /**
+     * @param index
+     *            the index to set
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
-	/**
-	 * @return the index
-	 */
-	public int getIndex() {
-		return index;
-	}
+    /**
+     * @return the index
+     */
+    public int getIndex() {
+        return index;
+    }
 
-	/**
-	 * @return the uploadDataRef
-	 */
-	public ModelRef<Image> getImageRef() {
-		return imageRef;
-	}
+    /**
+     * @return the uploadDataRef
+     */
+    public ModelRef<Image> getImageRef() {
+        return imageRef;
+    }
 }

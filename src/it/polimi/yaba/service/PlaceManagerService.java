@@ -105,7 +105,7 @@ public class PlaceManagerService extends ModelManagerService<Place> {
 
     public void updateShop(Place place, Shop shop) {
         place.getShopRef().setModel(shop);
-        Datastore.put(place);  
+        Datastore.put(place);
     }
 
 }

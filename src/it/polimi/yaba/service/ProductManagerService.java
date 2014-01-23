@@ -72,7 +72,9 @@ public class ProductManagerService extends ModelManagerService<Product> {
         List<Product> products = new ArrayList<Product>();
         for (Product p : selectAll()) {
             if (p.getName().equalsIgnoreCase(query)
-                || p.getName().contains(query)) {
+                || p.getName().contains(query)
+                || p.getName().contains(query.toLowerCase())
+                || p.getName().contains(query.toUpperCase())) {
                 products.add(p);
             }
         }
@@ -80,6 +82,7 @@ public class ProductManagerService extends ModelManagerService<Product> {
     }
 
     public boolean exists(String name) {
+        name.trim();
         List<Product> products =
             Datastore
                 .query(ProductMeta.get())
@@ -89,6 +92,7 @@ public class ProductManagerService extends ModelManagerService<Product> {
     }
 
     public List<Product> select(String name) {
+        name.trim();
         List<Product> products =
             Datastore
                 .query(ProductMeta.get())

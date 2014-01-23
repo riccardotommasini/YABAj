@@ -68,10 +68,12 @@ public class ShopManagerService extends ModelManagerService<Shop> {
         List<Shop> shops = new ArrayList<Shop>();
         for (Shop s : selectAll()) {
             if (s.getName().equalsIgnoreCase(query)
-                || s.getName().contains(query)) {
+                || s.getName().contains(query.toLowerCase())
+                || s.getName().contains(query.toUpperCase())) {
                 shops.add(s);
             } else if (s.getEmail().equalsIgnoreCase(query)
-                || s.getEmail().contains(query)) {
+                || s.getEmail().contains(query.toLowerCase())
+                || s.getEmail().contains(query.toUpperCase())) {
                 shops.add(s);
             }
         }
@@ -79,6 +81,7 @@ public class ShopManagerService extends ModelManagerService<Shop> {
     }
 
     public boolean exists(String name) {
+        name.trim();
         Shop shop =
             Datastore
                 .query(ShopMeta.get())
@@ -88,6 +91,7 @@ public class ShopManagerService extends ModelManagerService<Shop> {
     }
 
     public Shop select(String name) {
+        name.trim();
         Shop shop =
             Datastore
                 .query(ShopMeta.get())

@@ -72,7 +72,9 @@ public class PostManagerService extends ModelManagerService<Post> {
         query.trim();
         List<Post> posts = new ArrayList<Post>();
         for (Post p : selectAll()) {
-            if (p.getText().contains(query)) {
+            if (p.getText().contains(query)
+                || p.getText().contains(query.toLowerCase())
+                || p.getText().contains(query.toUpperCase())) {
                 posts.add(p);
             }
         }
@@ -104,6 +106,16 @@ public class PostManagerService extends ModelManagerService<Post> {
         return posts;
     }
 
+    public List<Post> searchByUsers(List<User> users) {
+        List<Post> posts = new ArrayList<Post>();
+        if (!users.isEmpty()) {
+            for (User u : users) {
+                posts.addAll(u.getPosts());
+            }
+        }
+        return posts;
+    }
+
     public List<Post> getRecents() {
         List<Post> posts =
             Datastore
@@ -113,4 +125,5 @@ public class PostManagerService extends ModelManagerService<Post> {
                 .asList();
         return posts;
     }
+
 }

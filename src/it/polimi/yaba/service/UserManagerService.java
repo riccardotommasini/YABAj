@@ -58,16 +58,24 @@ public class UserManagerService extends ModelManagerService<User> {
         List<User> users = new ArrayList<User>();
         for (User u : selectAll()) {
             if (u.getUsername().equalsIgnoreCase(query)
-                || u.getUsername().contains(query)) {
+                || u.getUsername().contains(query)
+                || u.getUsername().contains(query.toLowerCase())
+                || u.getUsername().contains(query.toUpperCase())) {
                 users.add(u);
             } else if (u.getName().equalsIgnoreCase(query)
-                || u.getName().contains(query)) {
+                || u.getName().contains(query)
+                || u.getName().contains(query.toLowerCase())
+                || u.getName().contains(query.toUpperCase())) {
                 users.add(u);
             } else if (u.getSurname().equalsIgnoreCase(query)
-                || u.getSurname().contains(query)) {
+                || u.getSurname().contains(query)
+                || u.getSurname().contains(query.toLowerCase())
+                || u.getSurname().contains(query.toUpperCase())) {
                 users.add(u);
             } else if (u.getEmail().equalsIgnoreCase(query)
-                || u.getEmail().contains(query)) {
+                || u.getEmail().contains(query)
+                || u.getEmail().contains(query.toLowerCase())
+                || u.getEmail().contains(query.toUpperCase())) {
                 users.add(u);
             }
         }
@@ -75,6 +83,7 @@ public class UserManagerService extends ModelManagerService<User> {
     }
 
     public boolean exists(String username) {
+        username.trim();
         User user =
             Datastore
                 .query(UserMeta.get())
@@ -84,6 +93,7 @@ public class UserManagerService extends ModelManagerService<User> {
     }
 
     public User select(String username) {
+        username.trim();
         User user =
             Datastore
                 .query(UserMeta.get())

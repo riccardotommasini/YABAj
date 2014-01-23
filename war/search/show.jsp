@@ -8,71 +8,6 @@
 <jsp:param name="pageName" value="Shops" />
 </jsp:include>
 
-
-<c:if test="${ ! empty users }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Users <span class="badge">${fn:length(users)}</span></h3>
-			<ul>
-				<c:forEach var="user" items="${users}">
-					<li>
-						<p><a href="/users/profile?username=${f:h(user.username)}">
-							${f:h(user.name)} ${f:h(user.surname)}
-						</a></p>
-					</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-</c:if>
-
-
-<c:if test="${ ! empty places }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Places <span class="badge">${fn:length(places)}</span></h3>
-			<ul>
-				<c:forEach var="place" items="${places}">
-					<p><li>${f:h(place.name)}</li></p>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-</c:if>
-
-
-<c:if test="${ ! empty products }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
-			<c:forEach var="product" items="${products}">
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="jumbotron">
-						<p>
-							<strong>Name:</strong>
-							<c:choose>
-								<c:when test="${ product.shop != null }">
-									<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>
-								</c:when>
-								<c:otherwise>
-									${product.name}
-								</c:otherwise>
-							</c:choose>
-						</p>
-						<c:if test="${product.image != null}">
-							<div align="center">
-								<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
-								<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
-							</div>
-						</c:if>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</c:if>
-
-
 <c:if test="${ ! empty shops }">
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
@@ -128,6 +63,67 @@
 					</div>
 				</div>
 			</c:forEach>
+		</div>
+	</div>
+</c:if>
+
+<c:if test="${ ! empty products }">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
+			<c:forEach var="product" items="${products}">
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="jumbotron">
+						<p>
+							<strong>Name:</strong>
+							<c:choose>
+								<c:when test="${ product.shop != null }">
+									<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>
+								</c:when>
+								<c:otherwise>
+									${product.name}
+								</c:otherwise>
+							</c:choose>
+						</p>
+						<c:if test="${product.image != null}">
+							<div align="center">
+								<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
+								<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+</c:if>
+
+<c:if test="${ ! empty users }">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3 class="title">Users <span class="badge">${fn:length(users)}</span></h3>
+			<ul>
+				<c:forEach var="user" items="${users}">
+					<li>
+						<p><a href="/users/profile?username=${f:h(user.username)}">
+							${f:h(user.name)} ${f:h(user.surname)}
+						</a></p>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+</c:if>
+
+<c:if test="${ ! empty places }">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3 class="title">Places <span class="badge">${fn:length(places)}</span></h3>
+			<ul>
+				<c:forEach var="place" items="${places}">
+					<p><li>${f:h(place.name)}</li></p>
+				</c:forEach>
+			</ul>
 		</div>
 	</div>
 </c:if>

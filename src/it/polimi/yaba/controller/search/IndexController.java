@@ -40,6 +40,7 @@ public class IndexController extends YABAController {
         postsSet.addAll(postManager.search(query));
         postsSet.addAll(postManager.searchByPlaces(places));
         postsSet.addAll(postManager.searchByProducts(products));
+        postsSet.addAll(postManager.searchByUsers(users));
         List<Post> posts = new ArrayList<Post>(postsSet);
         Collections.sort(posts);
         requestScope("users", users);

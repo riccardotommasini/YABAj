@@ -1,0 +1,21 @@
+*.DS_Store
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.jar
+
+# App Engine and Eclipse and Slim3 Stuff #
+.classpath
+.externalToolBuilders/
+.factorypath
+.project
+.settings/
+build.properties
+build.xml
+/lib
+/libsrc
+/test
+/war/ktrwjr
+/war/WEB-INF

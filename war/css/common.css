@@ -1,0 +1,152 @@
+/*
+ * ===================
+ *      index
+ * ===================
+ */
+#post-form {
+	margin-top: 40px;
+}
+
+#post-form span {
+	margin-left: 5px;
+}
+
+#wait-geolocation {
+	margin-bottom: 20px;
+}
+
+#wait-geolocation img{
+	margin-left: 10px;
+}
+
+/*
+ * ===================
+ *      new post
+ * ===================
+ */
+.ui-autocomplete-loading {
+		background: white url('/img/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+#canvas {
+	display: none;
+}
+
+.thumbnail {
+	width: 100px;
+	height: 100px;
+	margin: 0;
+}
+
+#preview {
+	margin-bottom: 0 !important;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+textarea { 
+	resize:vertical; 
+}
+
+/*
+ * ===================
+ *       profile
+ * ===================
+ */
+.big-thumbnail {
+	width: 200px !important;
+	height: auto !important;
+}
+
+.profile-thumbnail {
+	width: 170px !important;
+	height: auto !important;
+	margin: 0;
+	margin-bottom: 20px;
+	padding: 5px 0 0 0;	
+}
+
+/* mobile (xs) */
+.jumbotron {
+	font-size: 90% !important;
+	margin: 10px 5px 10px 10px !important;
+	padding: 20px !important;
+	max-width: 270px !important;
+}
+
+/* tablet (sm) */
+@media (min-width: 768px) { 
+	.jumbotron {
+		max-width: 300px !important;
+		margin: 20px 10px 10px 20px !important;
+	}
+}
+
+/* desktop () md*/
+@media (min-width: 992px) { 
+	.jumbotron {
+		max-width: 300px !important;
+		margin: 15px 2px 15px 2px !important;
+	}
+}
+
+/*
+ * ===================
+ *       search
+ * ===================
+ */
+
+h3 { font-size: 1.4em; }
+
+h3 {
+    vertical-align:middle;
+}
+
+h3>.badge {
+	vertical-align:middle;
+    margin-top: -0.2em;
+}
+
+/*
+ * ===================
+ *    registration
+ * ===================
+ */
+
+#users, #shops {
+	margin: 12px;
+}
+	
+	
+/*
+ * ===================
+ *        error
+ * ===================
+ */
+
+#error-list {
+	margin-top: 20px;
+}
+	
+/*
+ * ===================
+ *      footer
+ * ===================
+ */
+footer {
+	padding: 10px 0;
+}

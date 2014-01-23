@@ -9,6 +9,12 @@
 	<jsp:param name="script" value="suggest" />
 </jsp:include>
 
+<style>
+  .ui-autocomplete-loading {
+    background: white url('/img/ui-anim_basic_16x16.gif') right center no-repeat;
+  }
+</style>
+
 <div class="row">
 	<div class="col-md-4 col-md-offset-4 ">
 		<form name="addPost" action="/posts/new" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">

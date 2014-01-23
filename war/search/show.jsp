@@ -37,9 +37,16 @@
 							<a href="/users/profile?username=${post.user.username}">${post.user.name} ${post.user.surname}</a>
 						</p>
 						<p><strong><fmt:formatDate value="${post.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-						<p>
-							<strong>Product:</strong> ${f:h(post.product.name)}
-							<strong>at:</strong> ${f:h(post.productPrice)} &euro;
+						<p><strong>Product:</strong>
+							<c:choose>
+								<c:when test="${post.product.shop != null}">
+									<a href="/shops/profile?name=${f:h(post.product.shop.name)}">
+										${f:h(post.product.name)}</a>
+								</c:when>
+								<c:otherwise>
+									${f:h(post.product.name)}
+								</c:otherwise>
+							</c:choose>
 						</p>
 						<c:if test="${post.image != null}">
 							<div align="center">

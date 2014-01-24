@@ -88,12 +88,12 @@ public class TagManagerService extends ModelManagerService<Tag> {
         return !tags.isEmpty();
     }
 
-    public List<Tag> select(String name) {
-        List<Tag> tags =
+    public Tag select(String name) {
+        Tag tags =
             Datastore
                 .query(TagMeta.get())
                 .filter(TagMeta.get().name.equal(name))
-                .asList();
+                .asSingle();
         return tags;
     }
 

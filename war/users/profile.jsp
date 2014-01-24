@@ -32,7 +32,7 @@
 		<c:choose>
 			<c:when test="${ sessionScope.user.username == user.username}">
 				<h3>Your posts:</h3>
-				<c:if test="${ empty posts }">
+				<c:if test="${ empty user.posts }">
 					<p>
 						<i>There aren't any posts yet! Go out and buy!</i>
 					</p>
@@ -40,7 +40,7 @@
 			</c:when>
 			<c:otherwise>
 				<h3>${f:h(user.name)}'s posts:</h3>
-				<c:if test="${ empty posts }">
+				<c:if test="${ empty user.posts }">
 					<p>
 						<i>There aren't any posts yet!</i>
 					</p>
@@ -50,7 +50,7 @@
 	</div>
 </div>
 <div class="row">
-	<c:forEach var="post" items="${posts}">
+	<c:forEach var="post" items="${ user.posts }">
 		<div class="col-xs-12 col-sm-6 col-md-3">
 			<div class="jumbotron">
 				<p><strong><fmt:formatDate value="${post.timestamp}" pattern="E d MMM yyyy"/></strong></p>
@@ -90,15 +90,15 @@
 	</c:forEach>
 </div>
 
-<c:if test="${ ! empty following }">
+<c:if test="${ ! empty users.following }">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
 			<h3>Following:</h3>
 			<ul>
-				<c:forEach var="follow" items="${following}">
+				<c:forEach var="fellowship" items="${user.following}">
 					<li>
-						<p><a href="/shops/profile?name=${f:h(follow.shop.name)}">
-							${f:h(follow.shop.name)}
+						<p><a href="/shops/profile?name=${fellowship.shop.name}">
+							${fellowship.shop.name}
 						</a></p>
 					</li>
 				</c:forEach>

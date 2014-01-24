@@ -44,10 +44,10 @@
 				<h3>${f:h(shop.name)}'s products:</h3>
 			</c:otherwise>
 		</c:choose>
-		<c:if test="${ empty products }">
+		<c:if test="${ empty shop.products }">
 			<p><i>No products!</i></p>
 		</c:if>
-		<c:forEach var="product" items="${products}">
+		<c:forEach var="product" items="${shop.products}">
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="jumbotron">
 					<p>
@@ -67,12 +67,16 @@
 							<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
 						</div>
 					</c:if>
-					<p>
-						<strong>Tags:</strong>
-						<c:forEach var="tagAssociation" items="${product.tags}">
-							${tagAssociation.tag.name}
-						</c:forEach>
-					</p>
+					<c:choose>
+						<c:when test="${ ! empty product.tags  }">
+							<p>
+								<strong>Tags:</strong>
+								<c:forEach var="tagAssociation" items="${product.tags}">
+									<a href="/tags/search?name=${tagAssociation.tag.name}">${tagAssociation.tag.name}</a>
+								</c:forEach>
+							</p>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 		</c:forEach>
@@ -83,11 +87,11 @@
 		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
 			<h3>Your advertises:</h3>
 			<p><a href="/advertises/add" class='btn btn-primary'>New Advertise</a></p>
-			<c:if test="${ empty advertises }">
+			<c:if test="${ empty shop.advertises }">
 				<p><i>No advertises!</i></p>
 			</c:if>
 			<ul>
-				<c:forEach var="advertise" items="${advertises}">
+				<c:forEach var="advertise" items="${shop.advertises}">
 					<li>
 						<div>
 							<p>Product advertised: ${f:h(advertise.product.name)}</p>
@@ -102,14 +106,14 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
 			<h3>Your followers:</h3>
-			<c:if test="${ empty followers }">
+			<c:if test="${ empty shop.followers }">
 				<p><i>No follower yet!</i></p>
 			</c:if>
 			<ul>
-				<c:forEach var="follower" items="${followers}">
+				<c:forEach var="fellowship" items="${shop.followers}">
 					<li>
-						<p><a href="/users/profile?username=${f:h(follower.user.username)}">
-							${f:h(follower.user.name)} ${f:h(follower.user.surname)}
+						<p><a href="/users/profile?username=${f:h(fellowship.user.username)}">
+							${f:h(fellowship.user.name)} ${f:h(fellowship.user.surname)}
 						</a></p>
 					</li>
 				</c:forEach>

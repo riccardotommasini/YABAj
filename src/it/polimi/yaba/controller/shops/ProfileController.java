@@ -1,9 +1,7 @@
 package it.polimi.yaba.controller.shops;
 
 import it.polimi.yaba.controller.YABAController;
-import it.polimi.yaba.model.Advertise;
 import it.polimi.yaba.model.Fellowship;
-import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.model.User;
 import it.polimi.yaba.service.ShopManagerService;
@@ -49,13 +47,8 @@ public class ProfileController extends YABAController {
                 }
             }
         }
-        List<Product> products = shop.getProducts();
-        List<Advertise> advertises = shop.getAdvertise();
         requestScope("shop", shop);
-        requestScope("products", products);
-        requestScope("advertises", advertises);
         requestScope("isFollower", isFollower);
-        requestScope("followers", followers);
         return forward("profile.jsp");
     }
 }

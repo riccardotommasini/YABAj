@@ -90,7 +90,7 @@ public class Shop implements Serializable {
         return placeListRef;
     }
 
-    public List<Advertise> getAdvertise() {
+    public List<Advertise> getAdvertises() {
         return getAdvertiseListRef().getModelList();
     }
 

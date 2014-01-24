@@ -1,14 +1,9 @@
 package it.polimi.yaba.controller.users;
 
 import it.polimi.yaba.controller.YABAController;
-import it.polimi.yaba.model.Fellowship;
-import it.polimi.yaba.model.Post;
-import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.User;
 import it.polimi.yaba.service.ProductManagerService;
 import it.polimi.yaba.service.UserManagerService;
-
-import java.util.List;
 
 import org.slim3.controller.Navigation;
 import org.slim3.util.RequestLocator;
@@ -44,12 +39,6 @@ public class ProfileController extends YABAController {
         }
 
         requestScope("user", user);
-        List<Post> posts = user.getPosts();
-        requestScope("posts", posts);
-        List<Product> products = productManager.selectAll();
-        requestScope("products", products);
-        List<Fellowship> following = user.getFollowing();
-        requestScope("following", following);
         return forward("profile.jsp");
     }
 }

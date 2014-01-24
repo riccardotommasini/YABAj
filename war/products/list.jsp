@@ -32,6 +32,16 @@
 									<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
 								</div>
 							</c:if>
+							<c:choose>
+								<c:when test="${ ! empty product.tags  }">
+									<p>
+										<strong>Tags:</strong>
+										<c:forEach var="tagAssociation" items="${product.tags}">
+											<a href="/tags/search?name=${tagAssociation.tag.name}">${tagAssociation.tag.name}</a>
+										</c:forEach>
+									</p>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</c:forEach>

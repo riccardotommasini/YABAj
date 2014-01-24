@@ -59,9 +59,15 @@ public class NewController extends YABAController {
         String[] tags = tagList.split(",");
         Tag tag;
         for (String t : tags) {
-            map = new HashMap<String, Object>();
-            map.put("name", t);
-            tag = tagManager.create(map);
+            if (!tagManager.exists(t)) {
+                map = new HashMap<String, Object>();
+                map.put("name", t);
+                tag = tagManager.create(map);
+                debug(this, "tag '" + tag.getName() + "' is new, created");
+            } else {
+                tag = tagManager.select(t);
+                debug(this, "tag '" + tag.getName() + "'exists");
+            }
             map = new HashMap<String, Object>();
             map.put("tag", tag.getKey());
             map.put("product", product.getKey());

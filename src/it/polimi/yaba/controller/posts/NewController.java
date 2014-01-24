@@ -6,6 +6,7 @@ import it.polimi.yaba.model.Image;
 import it.polimi.yaba.model.Place;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
+import it.polimi.yaba.model.Tag;
 import it.polimi.yaba.model.User;
 import it.polimi.yaba.service.CoordinateManagerService;
 import it.polimi.yaba.service.ImageManagerService;
@@ -13,6 +14,8 @@ import it.polimi.yaba.service.PlaceManagerService;
 import it.polimi.yaba.service.PostManagerService;
 import it.polimi.yaba.service.ProductManagerService;
 import it.polimi.yaba.service.ShopManagerService;
+import it.polimi.yaba.service.TagAssociationManagerService;
+import it.polimi.yaba.service.TagManagerService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +32,9 @@ public class NewController extends YABAController {
     private static PostManagerService postManager = PostManagerService.get();
     private static CoordinateManagerService coordinateManager =
         CoordinateManagerService.get();
+    private static TagManagerService tagManager = TagManagerService.get();
+    private static TagAssociationManagerService tagAssociationManager =
+        TagAssociationManagerService.get();
     private static ShopManagerService shopManager = ShopManagerService.get();
     private static PlaceManagerService placeManager = PlaceManagerService.get();
     private static ProductManagerService productManager = ProductManagerService
@@ -139,6 +145,25 @@ public class NewController extends YABAController {
             debug(this, "product '" + product.getName() + "' selected");
         } else {
             product = createNewProduct(asString("product"));
+        }
+
+        String tagList = asString("tags");
+        String[] tags = tagList.split(",");
+        Tag tag;
+        for (String t : tags) {
+            if (!tagManager.exists(t)) {
+                map = new HashMap<String, Object>();
+                map.put("name", t);
+                tag = tagManager.create(map);
+                debug(this, "tag '" + tag.getName() + "' is new, created");
+            } else {
+                tag = tagManager.select(t);
+                debug(this, "tag '" + tag.getName() + "'exists");
+            }
+            map = new HashMap<String, Object>();
+            map.put("tag", tag.getKey());
+            map.put("product", product.getKey());
+            tagAssociationManager.create(map);
         }
 
         FileItem formImgDef = requestScope("cameraInput");

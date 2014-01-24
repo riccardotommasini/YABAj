@@ -4,6 +4,7 @@ import it.polimi.yaba.meta.ProductMeta;
 import it.polimi.yaba.model.Image;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
+import it.polimi.yaba.model.TagAssociation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,4 +113,15 @@ public class ProductManagerService extends ModelManagerService<Product> {
         return products;
     }
 
+    public List<Product> searchByTag(String query) {
+        List<Product> products = new ArrayList<Product>();
+        for (Product p : selectAll()) {
+            for (TagAssociation t : p.getTags()) {
+                if (t.getTag().getName().equals(query)) {
+                    products.add(p);
+                }
+            }
+        }
+        return products;
+    }
 }

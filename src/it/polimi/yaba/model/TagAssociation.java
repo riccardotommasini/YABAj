@@ -1,19 +1,15 @@
 package it.polimi.yaba.model;
 
-import it.polimi.yaba.meta.TagAssociationMeta;
-
 import java.io.Serializable;
-import java.util.List;
 
 import org.slim3.datastore.Attribute;
-import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class Product implements Serializable {
+public class TagAssociation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,18 +19,10 @@ public class Product implements Serializable {
     @Attribute(version = true)
     private Long version;
 
-    private String name;
+    private final ModelRef<Product> productRef = new ModelRef<Product>(
+        Product.class);
 
-    private final ModelRef<Shop> shopRef = new ModelRef<Shop>(Shop.class);
-
-    private final ModelRef<Image> imageRef = new ModelRef<Image>(Image.class);
-
-    @Attribute(persistent = false)
-    private final InverseModelListRef<TagAssociation, Product> tagListRef =
-        new InverseModelListRef<TagAssociation, Product>(
-            TagAssociation.class,
-            TagAssociationMeta.get().productRef.getName(),
-            this);
+    private final ModelRef<Tag> tagRef = new ModelRef<Tag>(Tag.class);
 
     public Key getKey() {
         return key;
@@ -52,36 +40,20 @@ public class Product implements Serializable {
         this.version = version;
     }
 
-    public String getName() {
-        return name;
+    public Product getProduct() {
+        return getProductRef().getModel();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ModelRef<Product> getProductRef() {
+        return productRef;
     }
 
-    public Shop getShop() {
-        return getShopRef().getModel();
+    public Tag getTag() {
+        return getTagRef().getModel();
     }
 
-    public ModelRef<Shop> getShopRef() {
-        return shopRef;
-    }
-
-    public Image getImage() {
-        return getImageRef().getModel();
-    }
-
-    public ModelRef<Image> getImageRef() {
-        return imageRef;
-    }
-
-    public List<TagAssociation> getTagList() {
-        return getTagListRef().getModelList();
-    }
-
-    public InverseModelListRef<TagAssociation, Product> getTagListRef() {
-        return tagListRef;
+    public ModelRef<Tag> getTagRef() {
+        return tagRef;
     }
 
     @Override
@@ -103,7 +75,7 @@ public class Product implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Product other = (Product) obj;
+        TagAssociation other = (TagAssociation) obj;
         if (key == null) {
             if (other.key != null) {
                 return false;

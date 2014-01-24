@@ -49,7 +49,7 @@ public class NewController extends YABAController {
         }
 
         try {
-            Long.parseLong(asString("price"));
+            Long.parseLong(asString("price").trim());
         } catch (NumberFormatException e) {
             return reportErrors("Price must be a number!");
         }

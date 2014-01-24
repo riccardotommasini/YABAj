@@ -12,10 +12,22 @@
 		<link rel="shortcut icon" href="/img/favicon.ico">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+		<%
+		if(request.getParameter("tags") != null){
+ 			out.println("<script src='/js/tag-it.min.js' type='text/javascript' charset='utf-8'></script>");
+ 			out.println("<script src='/js/tags.js'></script>");
+		}
+		%>
 		<link rel="stylesheet" href="/css/common.css">
 		<link rel='stylesheet' href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css'>
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+		<%
+		if(request.getParameter("tags") != null){
+ 			out.println("<link href='/css/jquery.tagit.css' rel='stylesheet' type='text/css'>");
+			out.println("<link href='/css/tagit.ui-zendesk.css' rel='stylesheet' type='text/css'>");
+		}
+		%>
 		<script src="/js/bootstrap.min.js"></script>
 		<%
 		if(request.getParameterValues("script") != null){

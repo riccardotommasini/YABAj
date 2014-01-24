@@ -5,6 +5,7 @@ import it.polimi.yaba.service.ModelManagerService;
 import it.polimi.yaba.service.PlaceManagerService;
 import it.polimi.yaba.service.ProductManagerService;
 import it.polimi.yaba.service.ShopManagerService;
+import it.polimi.yaba.service.TagManagerService;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,6 +42,11 @@ public class JsonController extends YABAController {
             manager = ProductManagerService.get();
             productResults.addAll(performSearch(query));
             suggestions.addAll(productResults);
+        } else if (type.equals("tag")) {
+            Set<JSONObject> tagResults = new HashSet<JSONObject>();
+            manager = TagManagerService.get();
+            tagResults.addAll(performSearch(query));
+            suggestions.addAll(tagResults);
         } else {
             return null;
         }

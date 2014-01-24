@@ -6,8 +6,8 @@
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="pageName" value="New Post" />
 	<jsp:param name="script" value="uploadPreview" />
+	<jsp:param name="tags" value="true"/>
 </jsp:include>
-
 
 <div class="row">
 	<div class="col-md-4 col-md-offset-4 ">
@@ -29,6 +29,12 @@
 			<div class="form-group">
 				<div class="col-xs-12 col-md-12">
 					<input type="text" name="name" id="name" class="form-control" placeholder="Name"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
+					<input name="tags" id="tag-list" class="tagit-hidden-field">
+					<ul id="tags" class="tagit ui-widget ui-widget-content ui-corner-all"></ul>
 				</div>
 			</div>
 			<div class="form-group" align="center">

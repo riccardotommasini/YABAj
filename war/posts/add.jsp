@@ -40,6 +40,11 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-12 col-md-12">
+					<input type="text" name="tags" id="input-tag"  class="form-control" placeholder="Product Tags"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
 					<div class="input-group">
 						<span class="input-group-addon">&euro;</span>
 						<input type="text" name="price" id="input-price" class="form-control" placeholder="Product Price"/>

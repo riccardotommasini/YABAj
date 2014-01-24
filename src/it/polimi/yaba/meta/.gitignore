@@ -13,3 +13,6 @@
 /ImageFragmentMeta.java
 /ImageMeta.java
 /BlobstoreMeta.java
+/TagMeta.java
+/TagListMeta.java
+/TagAssociationMeta.java

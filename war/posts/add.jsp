@@ -7,6 +7,7 @@
 	<jsp:param name="pageName" value="New Post" />
 	<jsp:param name="script" value="uploadPreview" />
 	<jsp:param name="script" value="suggest" />
+	<jsp:param name="tags" value="true" />
 </jsp:include>
 
 <style>
@@ -40,7 +41,8 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-12 col-md-12">
-					<input type="text" name="tags" id="input-tag"  class="form-control" placeholder="Product Tags"/>
+					<input type="text" name="tags" id="tag-list" class="tagit-hidden-field">
+					<ul id="tags" class="tagit ui-widget ui-widget-content ui-corner-all"></ul>
 				</div>
 			</div>
 			<div class="form-group">

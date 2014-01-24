@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$('#tags').tagit({
 		autocomplete: {
 			delay: 0, 
-			minLength: 2,
+			minLength: 1,
 			source: function( request, response ) {
 				$.ajax({
 					url: "/search/json?type=tag&query="+request.term,
@@ -18,6 +18,7 @@ $(document).ready(function() {
 			}
 		},
 		singleField: true,
-		singleFieldNode: $('#tag-list')
+		singleFieldNode: $('#tag-list'),
+		placeholderText: 'Tags'
 	});
 });

@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-12 col-md-12">
-					<input name="tags" id="tag-list" class="tagit-hidden-field">
+					<input type="text" name="tags" id="tag-list" class="tagit-hidden-field">
 					<ul id="tags" class="tagit ui-widget ui-widget-content ui-corner-all"></ul>
 				</div>
 			</div>

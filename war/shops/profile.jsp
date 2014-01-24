@@ -67,6 +67,12 @@
 							<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
 						</div>
 					</c:if>
+					<p>
+						<strong>Tags:</strong>
+						<c:forEach var="tagAssociation" items="${product.tags}">
+							${tagAssociation.tag.name}
+						</c:forEach>
+					</p>
 				</div>
 			</div>
 		</c:forEach>

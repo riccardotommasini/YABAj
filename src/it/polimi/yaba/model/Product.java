@@ -76,7 +76,7 @@ public class Product implements Serializable {
         return imageRef;
     }
 
-    public List<TagAssociation> getTagList() {
+    public List<TagAssociation> getTags() {
         return getTagListRef().getModelList();
     }
 

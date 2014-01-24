@@ -3,9 +3,13 @@ package it.polimi.yaba.controller.products;
 import it.polimi.yaba.controller.YABAController;
 import it.polimi.yaba.meta.ProductMeta;
 import it.polimi.yaba.model.Image;
+import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
+import it.polimi.yaba.model.Tag;
 import it.polimi.yaba.service.ImageManagerService;
 import it.polimi.yaba.service.ProductManagerService;
+import it.polimi.yaba.service.TagAssociationManagerService;
+import it.polimi.yaba.service.TagManagerService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +22,9 @@ import org.slim3.util.RequestLocator;
 public class NewController extends YABAController {
     private static ProductManagerService productManager = ProductManagerService
         .get();
+    private static TagManagerService tagManager = TagManagerService.get();
+    private static TagAssociationManagerService tagAssociationManager =
+        TagAssociationManagerService.get();
     private static ImageManagerService imageManager = new ImageManagerService();
 
     @Override
@@ -41,11 +48,25 @@ public class NewController extends YABAController {
         FileItem formImgDef = requestScope("cameraInput");
         Image imgDef = imageManager.upload(formImgDef);
 
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map;
+        map = new HashMap<String, Object>();
         map.put("name", name);
         map.put("shop", shop.getKey());
         map.put("imageRef", imgDef);
-        productManager.create(map);
+        Product product = productManager.create(map);
+
+        String tagList = asString("tags");
+        String[] tags = tagList.split(",");
+        Tag tag;
+        for (String t : tags) {
+            map = new HashMap<String, Object>();
+            map.put("name", t);
+            tag = tagManager.create(map);
+            map = new HashMap<String, Object>();
+            map.put("tag", tag.getKey());
+            map.put("product", product.getKey());
+            tagAssociationManager.create(map);
+        }
 
         return redirect("/shops/profile?name=" + shop.getName());
     }

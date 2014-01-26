@@ -1,6 +1,8 @@
 package it.polimi.yaba.controller.search;
 
 import it.polimi.yaba.controller.YABAController;
+import it.polimi.yaba.model.Product;
+import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.service.ModelManagerService;
 import it.polimi.yaba.service.PlaceManagerService;
 import it.polimi.yaba.service.ProductManagerService;
@@ -16,6 +18,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slim3.controller.Navigation;
+import org.slim3.util.RequestLocator;
 import org.slim3.util.ResponseLocator;
 
 public class JsonController extends YABAController {
@@ -47,6 +50,12 @@ public class JsonController extends YABAController {
             manager = TagManagerService.get();
             tagResults.addAll(performSearch(query));
             suggestions.addAll(tagResults);
+        } else if (type.equals("shopProducts")) {
+            Shop shop =
+                (Shop) RequestLocator.get().getSession().getAttribute("shop");
+            for (Product p : shop.getProducts()) {
+                suggestions.add(ProductManagerService.get().generateJson(p));
+            }
         } else {
             return null;
         }

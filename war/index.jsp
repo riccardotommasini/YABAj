@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="pageName" value="Index" />
@@ -37,4 +38,30 @@
 		</div>
 	</div>
 </div>
+<c:if test="${sessionScope.user != null && sessionScope.user.name == user.name}">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
+					<h3>Advertisment:</h3>
+					<c:if test="${ empty shop.advertises }">
+						<p><i>No advertises!</i></p>
+					</c:if>
+					<ul>
+						<c:forEach var="advertise" items="${shop.advertises}">
+							<li>
+								<div>
+									<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
+									<p>Products: ${f:h(advertise.products)}</p>
+									<p>With message: ${f:h(advertise.text)}</p>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</c:if>
+
 <jsp:include page="/common/footer.jsp" />

@@ -54,17 +54,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-				<c:choose>
-					<c:when test="${sessionScope.user != null}">
-						<a class="navbar-brand" href="/users/profile?username=${sessionScope.user.username}">YABA</a>
-					</c:when>
-					<c:when test="${sessionScope.shop != null}">
-						<a class="navbar-brand" href="/shops/profile?name=${sessionScope.shop.name}">YABA</a>
-					</c:when>
-					<c:otherwise>
-						<a class="navbar-brand" href="/">YABA</a>
-					</c:otherwise>
-				</c:choose>
+				<a class="navbar-brand" href="/">YABA</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">

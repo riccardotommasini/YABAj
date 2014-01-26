@@ -1,20 +1,15 @@
 package it.polimi.yaba.model;
 
-import it.polimi.yaba.meta.AdvertisedProductMeta;
-
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 import org.slim3.datastore.Attribute;
-import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 import org.slim3.datastore.ModelRef;
 
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class Advertise implements Serializable {
+public class AdvertisedProduct implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,18 +19,11 @@ public class Advertise implements Serializable {
     @Attribute(version = true)
     private Long version;
 
-    private String text;
+    private final ModelRef<Product> productRef = new ModelRef<Product>(
+        Product.class);
 
-    private Date timestamp;
-
-    @Attribute(persistent = false)
-    private final InverseModelListRef<AdvertisedProduct, Advertise> advertisedProductListRef =
-        new InverseModelListRef<AdvertisedProduct, Advertise>(
-            AdvertisedProduct.class,
-            AdvertisedProductMeta.get().advertiseRef.getName(),
-            this);
-
-    private final ModelRef<Shop> shopRef = new ModelRef<Shop>(Shop.class);
+    private final ModelRef<Advertise> advertiseRef = new ModelRef<Advertise>(
+        Advertise.class);
 
     public Key getKey() {
         return key;
@@ -53,36 +41,20 @@ public class Advertise implements Serializable {
         this.version = version;
     }
 
-    public String getText() {
-        return text;
+    public Product getProduct() {
+        return getProductRef().getModel();
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public ModelRef<Product> getProductRef() {
+        return productRef;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Advertise getAdvertise() {
+        return getAdvertiseRef().getModel();
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public List<AdvertisedProduct> getAdvertisedProduct() {
-        return getAdvertisedProductListRef().getModelList();
-    }
-
-    public InverseModelListRef<AdvertisedProduct, Advertise> getAdvertisedProductListRef() {
-        return advertisedProductListRef;
-    }
-
-    public Shop getShop() {
-        return getShopRef().getModel();
-    }
-
-    public ModelRef<Shop> getShopRef() {
-        return shopRef;
+    public ModelRef<Advertise> getAdvertiseRef() {
+        return advertiseRef;
     }
 
     @Override
@@ -104,7 +76,7 @@ public class Advertise implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Advertise other = (Advertise) obj;
+        AdvertisedProduct other = (AdvertisedProduct) obj;
         if (key == null) {
             if (other.key != null) {
                 return false;

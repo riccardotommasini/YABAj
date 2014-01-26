@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$('#tags').tagit({
 		autocomplete: {
 			delay: 0, 
@@ -21,4 +22,5 @@ $(document).ready(function() {
 		singleFieldNode: $('#tag-list'),
 		placeholderText: 'Tags'
 	});
+	
 });

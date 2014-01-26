@@ -10,12 +10,6 @@
 	<jsp:param name="tags" value="true" />
 </jsp:include>
 
-<style>
-  .ui-autocomplete-loading {
-    background: white url('/img/ui-anim_basic_16x16.gif') right center no-repeat;
-  }
-</style>
-
 <div class="row">
 	<div class="col-md-4 col-md-offset-4 ">
 		<form name="addPost" action="/posts/new" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
@@ -29,8 +23,8 @@
 			<div class="form-group" align="center" >
 				<div class="col-xs-12 col-md-12">
 					<div class="fileUpload btn btn-default">
-					    <span>Product's Photo</span>
-					    <input type="file" class="upload" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" />
+						<span>Product's Photo</span>
+						<input type="file" class="upload" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" />
 					</div>
 				</div>
 			</div>

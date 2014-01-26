@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
-import org.slim3.util.BeanUtil;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
@@ -34,7 +33,6 @@ public class TagAssociationManagerService extends
     @Override
     public TagAssociation create(Map<String, Object> rawData) {
         TagAssociation tagAssociation = new TagAssociation();
-        BeanUtil.copy(rawData, tagAssociation);
 
         Product product =
             ProductManagerService.get().select((Key) rawData.get("product"));

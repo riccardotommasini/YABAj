@@ -7,6 +7,26 @@
 	<jsp:param name="pageName" value="${f:h(shop.name)}" />
 </jsp:include>
 
+<c:if test="${sessionScope.shop != null && sessionScope.shop.name == shop.name}">
+	<div class="row">
+		<div class="col-xs-12 col-md-offset-3 col-md-6">
+			<form name="search" action="/search/" method="GET">
+				<h3>Search:</h3>
+				<div class="input-group">
+					<input type="text" name="query" class="form-control" />
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Search!</button>
+					</span>
+				</div>
+			</form>
+			<div id="post-form" class="col-xs-12 col-md-12" align="center">
+				<a href="/advertises/add" class='btn btn-primary link'>New Advertise</a>
+				<a href="/products/add" class='btn btn-primary link'>New Product</a>
+			</div>
+		</div>
+	</div>
+	<hr>
+</c:if>
 <div class="row">
 	<c:if test="${shop.image != null}">
 		<div class="col-xs-12 col-md-2" align="center">
@@ -20,6 +40,12 @@
 				<h3>Your info:</h3>
 			</c:when>
 			<c:otherwise>
+				<c:if test="${sessionScope.user != null && !isFollower}">
+					<a href="/fellowship/new?shop=${shop.name}" class='btn btn-primary'>Follow</a>
+				</c:if>
+				<c:if test="${sessionScope.user != null && isFollower}">
+					<a href="/fellowship/remove?shop=${shop.name}" class='btn btn-primary'>Unfollow</a>
+				</c:if>
 				<h3>${f:h(shop.name)}'s info:</h3>
 			</c:otherwise>
 		</c:choose>
@@ -29,16 +55,9 @@
 </div>
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12" id="product-list">
-		<c:if test="${ sessionScope.user != null && !isFollower}">
-			<p><a href="/fellowship/new?shop=${shop.name}" class='btn btn-primary'>Follow</a></p>
-		</c:if>
-		<c:if test="${ sessionScope.user != null && isFollower}">
-			<p><a href="/fellowship/remove?shop=${shop.name}" class='btn btn-primary'>Unfollow</a></p>
-		</c:if>
 		<c:choose>
 			<c:when test="${ sessionScope.shop.name == shop.name}">
 				<h3>Your products:</h3>
-				<p><a href="/products/add" class='btn btn-primary'>New Product</a></p>
 			</c:when>
 			<c:otherwise>
 				<h3>${f:h(shop.name)}'s products:</h3>
@@ -86,7 +105,6 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
 			<h3>Your advertises:</h3>
-			<p><a href="/advertises/add" class='btn btn-primary'>New Advertise</a></p>
 			<c:if test="${ empty shop.advertises }">
 				<p><i>No advertises!</i></p>
 			</c:if>

@@ -42,6 +42,11 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
+					<input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="Confirm Password"/>
+				</div>
+			</div>
+			<div class="form-group">
 				<div id="checkbox-container" class="col-xs-12 col-md-12"></div>
 			</div>
 			<div class="form-group" align="center">

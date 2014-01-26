@@ -1,26 +1,5 @@
 /*
  * ===================
- *      index
- * ===================
- */
-#post-form {
-	margin-top: 40px;
-}
-
-#post-form span {
-	margin-left: 5px;
-}
-
-#wait-geolocation {
-	margin-bottom: 20px;
-}
-
-#wait-geolocation img{
-	margin-left: 10px;
-}
-
-/*
- * ===================
  *      new post
  * ===================
  */
@@ -67,6 +46,29 @@ textarea {
  *       profile
  * ===================
  */
+ 
+ #post-form {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#post-form span {
+	margin-left: 5px;
+}
+
+#wait-geolocation {
+	margin-bottom: 20px;
+}
+
+#wait-geolocation img {
+	margin-left: 10px;
+}
+
+.link {
+	margin-left: 25x;
+	margin-right: 25px;
+}
+
 .big-thumbnail {
 	width: 200px !important;
 	height: auto !important;

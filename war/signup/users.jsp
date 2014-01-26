@@ -51,6 +51,11 @@
 					<input type="password" name="password" id="password" class="form-control" placeholder="Password"/>
 				</div>
 			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
+					<input type="password" name="password-confirm" id="password-confirm" class="form-control" placeholder="Confirm Password"/>
+				</div>
+			</div>
 			<div class="form-group" align="center">
 				<div class="col-xs-12 col-md-12">
 					<input type="hidden" id="typeValue" name="type" value="user" />

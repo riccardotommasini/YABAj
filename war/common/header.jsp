@@ -14,8 +14,8 @@
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 		<%
 		if(request.getParameter("tags") != null){
- 			out.println("<script src='/js/tag-it.min.js' type='text/javascript' charset='utf-8'></script>");
- 			out.println("<script src='/js/tags.js'></script>");
+			out.println("<script src='/js/tag-it.min.js' type='text/javascript' charset='utf-8'></script>");
+			out.println("<script src='/js/tags.js'></script>");
 		}
 		%>
 		<link rel="stylesheet" href="/css/common.css">
@@ -24,7 +24,7 @@
 		<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
 		<%
 		if(request.getParameter("tags") != null){
- 			out.println("<link href='/css/jquery.tagit.css' rel='stylesheet' type='text/css'>");
+			out.println("<link href='/css/jquery.tagit.css' rel='stylesheet' type='text/css'>");
 			out.println("<link href='/css/tagit.ui-zendesk.css' rel='stylesheet' type='text/css'>");
 		}
 		%>
@@ -48,13 +48,23 @@
 		 <div class="navbar navbar-inverse navbar-static-top" role="navigation">
 		  <div class="container">
 			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand" href="/">YABA</a>
+				</button>
+				<c:choose>
+					<c:when test="${sessionScope.user != null}">
+						<a class="navbar-brand" href="/users/profile?username=${sessionScope.user.username}">YABA</a>
+					</c:when>
+					<c:when test="${sessionScope.shop != null}">
+						<a class="navbar-brand" href="/shops/profile?name=${sessionScope.shop.name}">YABA</a>
+					</c:when>
+					<c:otherwise>
+						<a class="navbar-brand" href="/">YABA</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">

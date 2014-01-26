@@ -40,6 +40,7 @@ public class NewController extends YABAController {
             validators.add("surname", validators.required());
             validators.add("email", validators.required());
             validators.add("password", validators.required());
+            validators.add("password-confirm", validators.required());
 
             if (!validators.validate()) {
                 return reportValidationErrors(validators.getErrors());
@@ -53,6 +54,11 @@ public class NewController extends YABAController {
             String surname = asString("surname");
             String email = asString("email");
             String password = asString("password");
+            String confirm = asString("password-confirm");
+
+            if (!password.equals(confirm)) {
+                return reportErrors("password do not match");
+            }
 
             Image imgDef = null;
             if (requestScope("cameraInput") != null) {
@@ -79,6 +85,7 @@ public class NewController extends YABAController {
             validators.add("name", validators.required());
             validators.add("email", validators.required());
             validators.add("password", validators.required());
+            validators.add("password-confirm", validators.required());
 
             if (!validators.validate()) {
                 return reportValidationErrors(validators.getErrors());
@@ -90,6 +97,11 @@ public class NewController extends YABAController {
             }
             String email = asString("email");
             String password = asString("password");
+            String confirm = asString("password-confirm");
+
+            if (!password.equals(confirm)) {
+                return reportErrors("password do not match");
+            }
 
             Image imgDef = null;
             if (requestScope("cameraInput") != null) {

@@ -20,9 +20,7 @@
 			</div>
 		</form>
 	</div>
-</div>
-<div class="row" id="post-form">
-	<div class="col-xs-12 col-md-12" align="center">
+	<div id="post-form" class="col-xs-12 col-md-12" align="center">
 		<div class="input-group">
 			<c:choose>
 				<c:when test="${ sessionScope.user == null && sessionScope.shop == null  }">
@@ -39,5 +37,4 @@
 		</div>
 	</div>
 </div>
-
 <jsp:include page="/common/footer.jsp" />

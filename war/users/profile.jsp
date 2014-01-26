@@ -9,6 +9,30 @@
 	<jsp:param name="script" value="geolocation" />
 </jsp:include>
 
+<c:if test="${sessionScope.user != null && sessionScope.user.name == user.name}">
+	<div class="row">
+		<div class="col-xs-12 col-md-offset-3 col-md-6">
+			<form name="search" action="/search/" method="GET">
+				<h3>Search:</h3>
+				<div class="input-group">
+					<input type="text" name="query" class="form-control" />
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Search!</button>
+					</span>
+				</div>
+			</form>
+		</div>
+		<div id="post-form" class="col-xs-12 col-md-12" align="center">
+			<div class="input-group">
+				<div id="wait-geolocation">
+					<span>You're about to be geolocated, please wait!</span>
+					<img src="/img/ui-anim_basic_16x16.gif">
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+</c:if>
 <div class="row">
 	<c:if test="${user.image != null}">
 		<div class="col-xs-12 col-md-2" align="center">
@@ -27,6 +51,7 @@
 		</c:choose>
 	</div>
 </div>
+<hr>
 <div class="row">
 	<div class="col-md-12">
 		<c:choose>
@@ -90,7 +115,7 @@
 	</c:forEach>
 </div>
 
-<c:if test="${ ! empty users.following }">
+<c:if test="${ ! empty user.following }">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
 			<h3>Following:</h3>

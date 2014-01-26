@@ -69,7 +69,7 @@ public class Advertise implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public List<AdvertisedProduct> getAdvertisedProduct() {
+    public List<AdvertisedProduct> getProducts() {
         return getAdvertisedProductListRef().getModelList();
     }
 

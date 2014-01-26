@@ -6,6 +6,7 @@ import it.polimi.yaba.model.Advertise;
 import it.polimi.yaba.model.Coordinate;
 import it.polimi.yaba.model.Shop;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class AdvertiseManagerService extends ModelManagerService<Advertise> {
 
         Shop shop = ShopManagerService.get().select((Key) rawData.get("shop"));
         advertise.getShopRef().setModel(shop);
+
+        advertise.setTimestamp(new Date());
 
         Transaction transaction = Datastore.beginTransaction();
         Key key = Datastore.put(advertise);

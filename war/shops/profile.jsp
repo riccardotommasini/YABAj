@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/common/header.jsp">
 	<jsp:param name="pageName" value="${f:h(shop.name)}" />
@@ -112,9 +113,9 @@
 				<c:forEach var="advertise" items="${shop.advertises}">
 					<li>
 						<div>
-							<p>Product advertised: ${f:h(advertise.product.name)}</p>
-							<p>On date ${f:h(advertise.timestamp)}</p>
-							<p>With message: ${f:h(advertise.text)}</p>
+							<p>Product advertised: ${advertise.products}</p>
+							<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
+							<p><strong>Message:</strong> ${advertise.text}</p>
 						</div>
 					</li>
 				</c:forEach>

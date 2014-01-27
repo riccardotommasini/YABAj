@@ -8,6 +8,12 @@
 	<jsp:param name="pageName" value="${f:h(shop.name)}" />
 </jsp:include>
 
+<script>
+$(document).ready(function() {
+	$('.carousel').carousel();
+});
+</script>
+
 <c:if test="${sessionScope.shop != null && sessionScope.shop.name == shop.name}">
 	<div class="row">
 		<div class="col-xs-12 col-md-offset-3 col-md-6">
@@ -102,28 +108,40 @@
 		</c:forEach>
 	</div>
 </div>
+
 <c:if test="${  sessionScope.shop.name == shop.name }">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Your advertises:</h3>
 			<c:if test="${ empty shop.advertises }">
-				<p><i>No advertises!</i></p>
+				<p><i>No advertises yet!</i></p>
 			</c:if>
-			<ul>
-				<c:forEach var="advertise" items="${shop.advertises}">
-					<li>
-						<div>
-							<p>Product advertised: ${advertise.products}</p>
-							<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-							<p><strong>Message:</strong> ${advertise.text}</p>
-						</div>
-					</li>
-				</c:forEach>
-			</ul>
+			<c:forEach var="advertise" items="${shop.advertises}">
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="jumbotron">
+						<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
+						<p>
+							<strong>Shop:</strong>
+							<a href="/shops/profile?name=${advertise.shop.name}">${advertise.shop.name}</a>
+						</p>
+						<c:forEach var="advertisedProduct" items="${advertise.products}">
+							<div align="center">
+								${advertisedProduct.product.name}
+								<c:if test="${advertisedProduct.product.image != null}">
+									<c:set var="showUrl" value="/show?key=${f:h(advertisedProduct.product.image.key)}&version=1" />
+									<img src="${f:url(showUrl)}" class="thumbnail big-thumbnail" />
+								</c:if>
+							</div>
+						</c:forEach>
+						<p>${advertise.text}</p>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
+
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Your followers:</h3>
 			<c:if test="${ empty shop.followers }">
 				<p><i>No follower yet!</i></p>

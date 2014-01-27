@@ -14,7 +14,7 @@ import org.slim3.datastore.ModelRef;
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class Advertise implements Serializable {
+public class Advertise implements Serializable, Comparable<Advertise> {
 
     private static final long serialVersionUID = 1L;
 
@@ -113,5 +113,14 @@ public class Advertise implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public int compareTo(Advertise o) {
+        if (this.timestamp.after(o.timestamp)) {
+            return -1;
+        } else if (this.timestamp.after(o.timestamp)) {
+            return 1;
+        }
+        return 0;
     }
 }

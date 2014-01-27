@@ -14,6 +14,7 @@
 		<form name="addProduct" action="/products/new" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
 			<div class="form-group" id="preview" align="center">
 				<div class="col-xs-12 col-md-12">
+					<h3>New Product:</h3>
 					<canvas id="canvas"></canvas>
 					<img class="thumbnail" id="thumbnail" src="/img/thumbnail.png" />
 				</div>

@@ -57,32 +57,6 @@
 				<a class="navbar-brand" href="/">YABA</a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<c:choose>
-						<c:when test="${fn:startsWith(requestScope['javax.servlet.forward.request_uri'], '/shops/list')}">
-							<li class="active"><a href='/shops/list'>Shops</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href='/shops/list'>Shops</a></li>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${fn:startsWith(requestScope['javax.servlet.forward.request_uri'], '/products/list')}">
-							<li class="active"><a href='/products/list'>Products</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href='/products/list'>Products</a></li>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${fn:startsWith(requestScope['javax.servlet.forward.request_uri'], '/posts/recent')}">
-							<li class="active"><a href='/posts/recent'>Recent Posts</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href='/posts/recent'>Recent Posts</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<c:choose>
 						<c:when test="${ sessionScope.user == null && sessionScope.shop == null  }">

@@ -12,6 +12,11 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-4 ">
 		<form name="addProduct" action="/advertises/new" method="POST" class="form-horizontal" role="form" >
+			<div class="form-group" align="center">
+				<div class="col-xs-12 col-md-12">
+					<h3>New Advertise:</h3>
+				</div>
+			</div>
 			<div class="shop-product form-group">
 				<div class="col-xs-12 col-md-12">
 					<input id="product0" type="text" name="products" class="form-control" placeholder="Product"/>

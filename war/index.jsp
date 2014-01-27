@@ -40,26 +40,32 @@
 </div>
 <c:if test="${sessionScope.user != null && sessionScope.user.name == user.name}">
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
-					<h3>Advertisment:</h3>
-					<c:if test="${ empty shop.advertises }">
-						<p><i>No advertises!</i></p>
-					</c:if>
-					<ul>
-						<c:forEach var="advertise" items="${shop.advertises}">
-							<li>
-								<div>
-									<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-									<p>Products: ${f:h(advertise.products)}</p>
-									<p>With message: ${f:h(advertise.text)}</p>
-								</div>
-							</li>
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<h3>Recent advertises:</h3>
+			<c:if test="${ empty advertises }">
+				<p><i>No advertises yet!</i></p>
+			</c:if>
+			<c:forEach var="advertise" items="${advertises}">
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="jumbotron">
+						<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
+						<p>
+							<strong>Shop:</strong>
+							<a href="/shops/profile?name=${advertise.shop.name}">${advertise.shop.name}</a>
+						</p>
+						<c:forEach var="advertisedProduct" items="${advertise.products}">
+							<div align="center">
+								${advertisedProduct.product.name}
+								<c:if test="${advertisedProduct.product.image != null}">
+									<c:set var="showUrl" value="/show?key=${f:h(advertisedProduct.product.image.key)}&version=1" />
+									<img src="${f:url(showUrl)}" class="thumbnail big-thumbnail" />
+								</c:if>
+							</div>
 						</c:forEach>
-					</ul>
+						<p>${advertise.text}</p>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 </c:if>

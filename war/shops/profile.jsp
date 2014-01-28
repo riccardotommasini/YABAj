@@ -116,7 +116,7 @@ $(document).ready(function() {
 			<c:if test="${ empty shop.advertises }">
 				<p><i>No advertises yet!</i></p>
 			</c:if>
-			<c:forEach var="advertise" items="${shop.advertises}">
+			<c:forEach var="advertise" items="${shop.advertises}" varStatus="externalStatus">
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<div class="jumbotron">
 						<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
@@ -124,7 +124,7 @@ $(document).ready(function() {
 							<strong>Shop:</strong>
 							<a href="/shops/profile?name=${advertise.shop.name}">${advertise.shop.name}</a>
 						</p>
-						<div id="carousel" class="carousel slide" style="width: 200px; margin: 0 auto">
+						<div id="carousel${externalStatus.count}" class="carousel slide" style="width: 200px; margin: 0 auto">
 							<div class="carousel-inner">
 								<c:forEach var="advertisedProduct" items="${advertise.products}" varStatus="status">
 									<c:choose>
@@ -139,18 +139,20 @@ $(document).ready(function() {
 											<c:set var="showUrl" value="/show?key=${f:h(advertisedProduct.product.image.key)}&version=1" />
 											<img src="${f:url(showUrl)}" class="thumbnail big-thumbnail" />
 										</c:if>
-										<div class="carousel-caption">
-											<p>${advertisedProduct.product.name}</p>
+										<div align="center">
+											<p class="myCarouselCaption">${advertisedProduct.product.name}</p>
 										</div>
 									</div>
 								</c:forEach>
 							</div>
-							<a class="left carousel-control" href="#carousel" data-slide="prev">
-								<span class="glyphicon glyphicon-chevron-left"></span>
-							</a>
-							<a class="right carousel-control" href="#carousel" data-slide="next">
-							    <span class="glyphicon glyphicon-chevron-right"></span>
-							</a>
+							<c:if test="${fn:length(advertise.products) > 1}">
+								<a class="left carousel-control" href="#carousel${externalStatus.count}" data-slide="prev">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</a>
+								<a class="right carousel-control" href="#carousel${externalStatus.count}" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</c:if>
 						</div>
 						<p class="description">${advertise.text}</p>
 					</div>

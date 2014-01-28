@@ -124,16 +124,35 @@ $(document).ready(function() {
 							<strong>Shop:</strong>
 							<a href="/shops/profile?name=${advertise.shop.name}">${advertise.shop.name}</a>
 						</p>
-						<c:forEach var="advertisedProduct" items="${advertise.products}">
-							<div align="center">
-								${advertisedProduct.product.name}
-								<c:if test="${advertisedProduct.product.image != null}">
-									<c:set var="showUrl" value="/show?key=${f:h(advertisedProduct.product.image.key)}&version=1" />
-									<img src="${f:url(showUrl)}" class="thumbnail big-thumbnail" />
-								</c:if>
+						<div id="carousel" class="carousel slide" style="width: 200px; margin: 0 auto">
+							<div class="carousel-inner">
+								<c:forEach var="advertisedProduct" items="${advertise.products}" varStatus="status">
+									<c:choose>
+										<c:when test="${status.count == 1}">
+											<div class="item active">
+										</c:when>
+										<c:otherwise>
+											<div class="item">
+										</c:otherwise>
+									</c:choose>
+										<c:if test="${advertisedProduct.product.image != null}">
+											<c:set var="showUrl" value="/show?key=${f:h(advertisedProduct.product.image.key)}&version=1" />
+											<img src="${f:url(showUrl)}" class="thumbnail big-thumbnail" />
+										</c:if>
+										<div class="carousel-caption">
+											<p>${advertisedProduct.product.name}</p>
+										</div>
+									</div>
+								</c:forEach>
 							</div>
-						</c:forEach>
-						<p>${advertise.text}</p>
+							<a class="left carousel-control" href="#carousel" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" href="#carousel" data-slide="next">
+							    <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+						<p class="description">${advertise.text}</p>
 					</div>
 				</div>
 			</c:forEach>

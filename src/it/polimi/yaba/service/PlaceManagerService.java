@@ -70,7 +70,8 @@ public class PlaceManagerService extends ModelManagerService<Place> {
         List<Place> places = new ArrayList<Place>();
         for (Place p : selectAll()) {
             if (p.getName().equalsIgnoreCase(query)
-                || p.getName().contains(query)) {
+                || p.getName().contains(query.toLowerCase())
+                || p.getName().contains(query.toUpperCase())) {
                 places.add(p);
             }
         }

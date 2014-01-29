@@ -15,6 +15,7 @@ import org.slim3.controller.validator.Errors;
 public abstract class YABAController extends Controller {
 
     private static ErrorQueueService errorQueue = ErrorQueueService.get();
+    private static final boolean DEPLOY = false;
 
     protected boolean requestParameterExists(String name) {
         return (request.getParameter(name) != null);
@@ -51,13 +52,15 @@ public abstract class YABAController extends Controller {
     }
 
     private void message(String type, Controller controller, String message) {
-        Date date = new Date();
-        SimpleDateFormat dateFormat =
-            new SimpleDateFormat("MMM dd, yyyy h:mm:ss a");
-        System.out.println(dateFormat.format(date)
-            + " "
-            + controller.getClass().getName());
-        System.out.println(type + ": " + message);
+        if (!DEPLOY) {
+            Date date = new Date();
+            SimpleDateFormat dateFormat =
+                new SimpleDateFormat("MMM dd, yyyy h:mm:ss a");
+            System.out.println(dateFormat.format(date)
+                + " "
+                + controller.getClass().getName());
+            System.out.println(type + ": " + message);
+        }
     }
 
     public String sha1(String input) {

@@ -2,13 +2,18 @@ package it.polimi.yaba.service;
 
 import it.polimi.yaba.meta.ProductMeta;
 import it.polimi.yaba.model.Image;
+import it.polimi.yaba.model.Place;
+import it.polimi.yaba.model.Post;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
+import it.polimi.yaba.model.Tag;
 import it.polimi.yaba.model.TagAssociation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.simple.JSONObject;
 import org.slim3.datastore.Datastore;
@@ -116,8 +121,8 @@ public class ProductManagerService extends ModelManagerService<Product> {
     public List<Product> searchByTag(String query) {
         List<Product> products = new ArrayList<Product>();
         for (Product p : selectAll()) {
-            for (TagAssociation t : p.getTags()) {
-                if (t.getTag().getName().equals(query)) {
+            for (TagAssociation ta : p.getTags()) {
+                if (ta.getTag().getName().equals(query)) {
                     products.add(p);
                 }
             }
@@ -125,4 +130,26 @@ public class ProductManagerService extends ModelManagerService<Product> {
         return products;
     }
 
+    public List<Product> searchByTag(List<Tag> tags) {
+        List<Product> products = new ArrayList<Product>();
+        for (Product p : selectAll()) {
+            for (Tag t : tags) {
+                for (TagAssociation ta : p.getTags()) {
+                    if (ta.getTag().getName().equals(t.getName())) {
+                        products.add(p);
+                    }
+                }
+            }
+        }
+        return products;
+    }
+
+    public List<Product> searchByPlace(List<Place> places) {
+        List<Post> posts = PostManagerService.get().searchByPlaces(places);
+        Set<Product> products = new HashSet<Product>();
+        for (Post post : posts) {
+            products.add(post.getProduct());
+        }
+        return new ArrayList<Product>(products);
+    }
 }

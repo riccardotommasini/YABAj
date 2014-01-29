@@ -5,74 +5,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/common/header.jsp">
-<jsp:param name="pageName" value="Shops" />
+	<jsp:param name="pageName" value="Shops" />
 </jsp:include>
-
-<c:if test="${ ! empty shops }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Shops <span class="badge">${fn:length(shops)}</span></h3>
-			<ul>
-				<c:forEach var="shop" items="${shops}">
-					<li>
-						<p><a href="/shops/profile?name=${f:h(shop.name)}">
-							${f:h(shop.name)}
-						</a></p>
-					</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-</c:if>
-
-<c:if test="${ ! empty posts }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Posts <span class="badge">${fn:length(posts)}</span></h3>
-			<c:forEach var="post" items="${posts}">
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="jumbotron">
-						<p>
-							<strong>By:</strong>
-							<a href="/users/profile?username=${post.user.username}">${post.user.name} ${post.user.surname}</a>
-						</p>
-						<p><strong><fmt:formatDate value="${post.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-						<p><strong>Product:</strong>
-							<c:choose>
-								<c:when test="${post.product.shop != null}">
-									<a href="/shops/profile?name=${f:h(post.product.shop.name)}">
-										${f:h(post.product.name)}</a>
-								</c:when>
-								<c:otherwise>
-									${f:h(post.product.name)}
-								</c:otherwise>
-							</c:choose>
-						</p>
-						<c:if test="${post.image != null}">
-							<div align="center">
-								<c:set var="showUrl" value="/show?key=${f:h(post.image.key)}&version=1" />
-								<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
-							</div>
-						</c:if>
-						<c:choose>
-							<c:when test="${f:h(post.place.shop.name != null)}">
-								<p>
-									<strong>At shop:</strong> <a
-										href="/shops/profile?name=${f:h(post.place.shop.name)}">
-										${f:h(post.place.shop.name)} </a>
-								</p>
-							</c:when>
-							<c:otherwise>
-								<p><strong>At place:</strong> ${f:h(post.place.name)}</p>
-							</c:otherwise>
-						</c:choose>
-						<p><strong>With message:</strong> ${f:h(post.text)}</p>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</c:if>
 
 <c:if test="${ ! empty products }">
 	<div class="row">
@@ -115,6 +49,34 @@
 	</div>
 </c:if>
 
+<c:if test="${ ! empty places }">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3 class="title">Shops <span class="badge">${fn:length(shops) + fn:length(places)}</span></h3>
+			<ul>
+				<c:forEach var="place" items="${places}">
+					<li>
+						<p>
+						<c:choose>
+							<c:when test="${place.shop != null}">
+								<a href="/shops/profile?name=${f:h(place.shop.name)}">
+									${f:h(place.shop.name)}<img src="/img/tick.png" class="tick" />
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/places/search?name=${f:h(place.name)}">
+									${f:h(place.name)}
+								</a>
+							</c:otherwise>
+						</c:choose>
+						</p>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+</c:if>
+
 <c:if test="${ ! empty users }">
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
@@ -132,20 +94,7 @@
 	</div>
 </c:if>
 
-<c:if test="${ ! empty places }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Places <span class="badge">${fn:length(places)}</span></h3>
-			<ul>
-				<c:forEach var="place" items="${places}">
-					<p><li>${f:h(place.name)}</li></p>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-</c:if>
-
-<c:if test="${empty users && empty places && empty products && empty shops && empty posts}">
+<c:if test="${ empty products && empty places && empty users }">
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
 			<strong><i>No results!</i></strong>

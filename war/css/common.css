@@ -155,6 +155,11 @@ h3>.badge {
     margin-top: -0.2em;
 }
 
+.tick {
+	width: 20px;
+	margin-left: 10px;
+}
+
 /*
  * ===================
  *    registration

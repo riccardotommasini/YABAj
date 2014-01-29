@@ -3,6 +3,7 @@ package it.polimi.yaba.model;
 import it.polimi.yaba.meta.TagAssociationMeta;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Attribute;
@@ -13,7 +14,7 @@ import org.slim3.datastore.ModelRef;
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class Product implements Serializable {
+public class Product implements Serializable, Comparable<Product> {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +25,8 @@ public class Product implements Serializable {
     private Long version;
 
     private String name;
+
+    private Date timestamp;
 
     private final ModelRef<Shop> shopRef = new ModelRef<Shop>(Shop.class);
 
@@ -66,6 +69,14 @@ public class Product implements Serializable {
 
     public ModelRef<Shop> getShopRef() {
         return shopRef;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Image getImage() {
@@ -112,5 +123,16 @@ public class Product implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public int compareTo(Product o) {
+        if (this.timestamp == null || o.timestamp == null) {
+            return 0;
+        } else if (this.timestamp.after(o.timestamp)) {
+            return -1;
+        } else if (this.timestamp.after(o.timestamp)) {
+            return 1;
+        }
+        return 0;
     }
 }

@@ -10,6 +10,7 @@ import it.polimi.yaba.model.Tag;
 import it.polimi.yaba.model.TagAssociation;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,8 @@ public class ProductManagerService extends ModelManagerService<Product> {
                 ShopManagerService.get().select((Key) rawData.get("shop"));
             product.getShopRef().setModel(shop);
         }
+
+        product.setTimestamp(new Date());
 
         Transaction transaction = Datastore.beginTransaction();
         Key key = Datastore.put(product);

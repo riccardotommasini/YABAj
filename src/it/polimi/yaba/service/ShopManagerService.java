@@ -1,11 +1,14 @@
 package it.polimi.yaba.service;
 
 import it.polimi.yaba.meta.ShopMeta;
+import it.polimi.yaba.model.Advertise;
 import it.polimi.yaba.model.Coordinate;
 import it.polimi.yaba.model.Image;
+import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -118,6 +121,26 @@ public class ShopManagerService extends ModelManagerService<Shop> {
             return null;
         }
         return coordinate.getPlace().getShop();
+    }
+
+    public List<Advertise> getRecentAdvertises(Shop shop) {
+        List<Advertise> advertises = shop.getAdvertises();
+        Collections.sort(advertises);
+        int max = 10;
+        if (max > advertises.size()) {
+            max = advertises.size();
+        }
+        return new ArrayList<Advertise>(advertises.subList(0, max));
+    }
+
+    public List<Product> getRecentProducts(Shop shop) {
+        List<Product> products = shop.getProducts();
+        Collections.sort(products);
+        int max = 5;
+        if (max > products.size()) {
+            max = products.size();
+        }
+        return new ArrayList<Product>(products.subList(0, max));
     }
 
 }

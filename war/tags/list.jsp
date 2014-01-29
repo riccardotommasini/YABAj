@@ -24,6 +24,18 @@
 				<c:forEach var="product" items="${products}">
 					<div class="col-xs-12 col-sm-6 col-md-3">
 						<div class="jumbotron">
+							<c:choose>
+								<c:when test="${product.shop != null}">
+									<p>
+										<strong>Shop:</strong><a href="/shops/profile?name=${f:h(product.shop.name)}">
+											${f:h(product.shop.name)}
+										</a>
+									<p>
+								</c:when>
+								<c:otherwise>
+									<!--//TODO-->
+								</c:otherwise>
+							</c:choose>
 							<p>
 								<strong>Name:</strong>
 								<c:choose>

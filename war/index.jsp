@@ -114,7 +114,6 @@ $(document).ready(function() {
 							<a href="/shops/profile?name=${product.shop.name}">${product.shop.name}</a>
 						</p>
 						<p>
-							<strong>Name:</strong>
 							<c:choose>
 								<c:when test="${ product.shop != null }">
 									<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>

@@ -45,6 +45,10 @@ public class ProductManagerService extends ModelManagerService<Product> {
         Image i = (Image) rawData.get("imageRef");
         product.getImageRef().setModel(i);
 
+        if (rawData.containsKey("price")) {
+            product.setPrice((String) rawData.get("price"));
+        }
+
         if (rawData.containsKey("shop")) {
             Shop shop =
                 ShopManagerService.get().select((Key) rawData.get("shop"));

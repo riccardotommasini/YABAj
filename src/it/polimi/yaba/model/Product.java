@@ -28,6 +28,8 @@ public class Product implements Serializable, Comparable<Product> {
 
     private Date timestamp;
 
+    private String price;
+
     private final ModelRef<Shop> shopRef = new ModelRef<Shop>(Shop.class);
 
     private final ModelRef<Image> imageRef = new ModelRef<Image>(Image.class);
@@ -77,6 +79,14 @@ public class Product implements Serializable, Comparable<Product> {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public Image getImage() {

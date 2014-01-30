@@ -53,6 +53,7 @@ public class NewController extends YABAController {
         map.put("name", name);
         map.put("shop", shop.getKey());
         map.put("imageRef", imgDef);
+        map.put("price", asString("price"));
         Product product = productManager.create(map);
 
         String tagList = asString("tags");

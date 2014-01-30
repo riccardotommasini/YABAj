@@ -77,7 +77,6 @@ $(document).ready(function() {
 			<div class="col-xs-12 col-sm-6 col-md-3">
 				<div class="jumbotron">
 					<p>
-						<strong>Name:</strong>
 						<c:choose>
 							<c:when test="${ product.shop != null }">
 								<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>
@@ -92,6 +91,9 @@ $(document).ready(function() {
 							<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
 							<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
 						</div>
+					</c:if>
+					<c:if test="${product.price != null}">
+						<p><strong>${product.price} &euro;</strong></p>
 					</c:if>
 					<c:choose>
 						<c:when test="${ ! empty product.tags  }">

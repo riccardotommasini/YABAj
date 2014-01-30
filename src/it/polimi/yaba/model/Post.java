@@ -28,18 +28,19 @@ public class Post implements Serializable, Comparable<Post> {
 
     private Date timestamp;
 
-    private Long productPrice;
+    private String productPrice;
 
-    private ModelRef<Image> imageRef = new ModelRef<Image>(Image.class);
+    private final ModelRef<Image> imageRef = new ModelRef<Image>(Image.class);
 
-    private ModelRef<Product> productRef = new ModelRef<Product>(Product.class);
+    private final ModelRef<Product> productRef = new ModelRef<Product>(
+        Product.class);
 
-    private ModelRef<Place> placeRef = new ModelRef<Place>(Place.class);
+    private final ModelRef<Place> placeRef = new ModelRef<Place>(Place.class);
 
-    private ModelRef<User> userRef = new ModelRef<User>(User.class);
+    private final ModelRef<User> userRef = new ModelRef<User>(User.class);
 
     @Attribute(persistent = false)
-    private InverseModelListRef<Comment, Post> commentListRef =
+    private final InverseModelListRef<Comment, Post> commentListRef =
         new InverseModelListRef<Comment, Post>(
             Comment.class,
             CommentMeta.get().postRef.getName(),
@@ -85,11 +86,11 @@ public class Post implements Serializable, Comparable<Post> {
         this.text = text;
     }
 
-    public Long getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Long price) {
+    public void setProductPrice(String price) {
         this.productPrice = price;
     }
 

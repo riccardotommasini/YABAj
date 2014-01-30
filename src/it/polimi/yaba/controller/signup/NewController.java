@@ -113,7 +113,7 @@ public class NewController extends YABAController {
             rawData = new HashMap<String, Object>();
             rawData.put("name", name);
             rawData.put("email", email);
-            rawData.put("password", password);
+            rawData.put("password", sha1(password));
             rawData.put("imageRef", imgDef);
 
             Shop shop = shopManager.create(rawData);

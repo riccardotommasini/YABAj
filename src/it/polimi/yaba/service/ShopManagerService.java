@@ -136,7 +136,7 @@ public class ShopManagerService extends ModelManagerService<Shop> {
     public List<Product> getRecentProducts(Shop shop) {
         List<Product> products = shop.getProducts();
         Collections.sort(products);
-        int max = 5;
+        int max = 4;
         if (max > products.size()) {
             max = products.size();
         }

@@ -50,6 +50,10 @@ public class PostManagerService extends ModelManagerService<Post> {
         User user = UserManagerService.get().select((Key) rawData.get("user"));
         post.getUserRef().setModel(user);
 
+        if (rawData.containsKey("price")) {
+            post.setProductPrice((String) rawData.get("price"));
+        }
+
         post.setTimestamp(new Date());
 
         Image i = (Image) rawData.get("imgDef");

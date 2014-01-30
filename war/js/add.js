@@ -42,7 +42,7 @@ $(document).ready(function() {
 			source: function( request, response ) {
 				console.log(request);
 				$.ajax({
-					url: "/search/json?type=shopProducts?query="request.term,
+					url: "/search/json?type=shopProducts",
 					dataType: "json",
 					success: function (data) {
 						response( $.map( data, function(item) {

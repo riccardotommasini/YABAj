@@ -54,12 +54,6 @@ public class NewController extends YABAController {
             return reportValidationErrors(validators.getErrors());
         }
 
-        try {
-            Long.parseLong(asString("price").trim());
-        } catch (NumberFormatException e) {
-            return reportErrors("Price must be a number!");
-        }
-
         Map<String, Object> map;
         Place place = null;
         Shop shop = null;
@@ -174,7 +168,7 @@ public class NewController extends YABAController {
         map = new HashMap<String, Object>();
         map.put("text", asString("text"));
         map.put("product", product.getKey());
-        map.put("productPrice", asLong("price"));
+        map.put("productPrice", asString("price"));
         map.put("user", user.getKey());
         map.put("place", place.getKey());
         map.put("imgDef", imgDef);

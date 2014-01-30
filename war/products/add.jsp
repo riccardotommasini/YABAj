@@ -38,6 +38,14 @@
 					<ul id="tags" class="tagit ui-widget ui-widget-content ui-corner-all"></ul>
 				</div>
 			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
+					<div class="input-group">
+						<span class="input-group-addon">&euro;</span>
+						<input type="text" name="price" id="input-price" class="form-control" placeholder="Product Price"/>
+					</div>
+				</div>
+			</div>
 			<div class="form-group" align="center">
 				<div class="col-xs-12 col-md-12">
 					<input type="submit" name="submit" value="Add Product" class="btn btn-primary" />

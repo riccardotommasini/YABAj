@@ -80,7 +80,26 @@ textarea {
  *       profile
  * ===================
  */
- 
+
+#info-row {
+	height: 40px;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+ #shop-image > img {
+ 	vertical-align: middle
+ }
+  
+.big-tick{
+	margin-bottom: 7px;	
+}
+
 .following {
 	margin-top: 0 !important;	
 }

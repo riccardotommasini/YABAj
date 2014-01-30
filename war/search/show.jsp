@@ -16,16 +16,14 @@
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<div class="jumbotron">
 						<p>
-							<strong>Name:</strong>
-							<c:choose>
-								<c:when test="${ product.shop != null }">
-									<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>
-								</c:when>
-								<c:otherwise>
-									${product.name}
-								</c:otherwise>
-							</c:choose>
+							${product.name}
 						</p>
+						<c:if test="${product.shop != null }">
+							<p>
+								<strong>Shop:</strong>
+								<a href="/shops/profile?name=${product.shop.name}">${product.shop.name}</a>
+							</p>
+						</c:if>
 						<c:if test="${product.image != null}">
 							<div align="center">
 								<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />

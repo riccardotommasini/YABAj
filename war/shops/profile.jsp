@@ -34,9 +34,21 @@ $(document).ready(function() {
 	</div>
 	<hr>
 </c:if>
-<div class="row">
+
+<div class="row" id="info-row">
+	<div class="col-xs-12 col-md-12">
+		<c:if test="${sessionScope.user != null && !isFollower}">
+			<a href="/fellowship/new?shop=${shop.name}" class='btn btn-primary'>Follow</a>
+		</c:if>
+		<c:if test="${sessionScope.user != null && isFollower}">
+			<a href="/fellowship/remove?shop=${shop.name}" class='btn btn-primary'>Unfollow</a>
+		</c:if>
+	</div>
+</div>
+<div class="row" >
 	<c:if test="${shop.image != null}">
-		<div class="col-xs-12 col-md-2" align="center">
+		<div class="col-xs-12 col-md-2" align="center" id="shop-image">
+			<span class="helper"></span>
 			<c:set var="showUrl" value="/show?key=${f:h(shop.image.key)}&version=1" />
 			<img class="thumbnail profile-thumbnail" src="${f:url(showUrl)}" />
 		</div>
@@ -47,13 +59,7 @@ $(document).ready(function() {
 				<h3>Your info:</h3>
 			</c:when>
 			<c:otherwise>
-				<c:if test="${sessionScope.user != null && !isFollower}">
-					<a href="/fellowship/new?shop=${shop.name}" class='btn btn-primary'>Follow</a>
-				</c:if>
-				<c:if test="${sessionScope.user != null && isFollower}">
-					<a href="/fellowship/remove?shop=${shop.name}" class='btn btn-primary'>Unfollow</a>
-				</c:if>
-				<h3>${f:h(shop.name)}'s info:</h3>
+				<h3>${f:h(shop.name)} <img class="big-tick" src="/img/tick.png"></h3>
 			</c:otherwise>
 		</c:choose>
 		<p>Name: ${f:h(shop.name)}</p>

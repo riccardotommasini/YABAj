@@ -37,15 +37,7 @@
 								</c:otherwise>
 							</c:choose>
 							<p>
-								<strong>Name:</strong>
-								<c:choose>
-									<c:when test="${ product.shop != null }">
-										<a href="/shops/profile?name=${product.shop.name}">${product.name}</a>
-									</c:when>
-									<c:otherwise>
-										${product.name}
-									</c:otherwise>
-								</c:choose>
+								${product.name}
 							</p>
 							<c:if test="${product.image != null}">
 								<div align="center">

@@ -1,6 +1,6 @@
 package it.polimi.yaba.controller;
 
-import it.polimi.yaba.model.Advertise;
+import it.polimi.yaba.model.Advertisement;
 import it.polimi.yaba.model.Fellowship;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
@@ -31,7 +31,7 @@ public class IndexController extends YABAController {
                 (User) RequestLocator.get().getSession().getAttribute("user");
             user = userManager.select(user.getUsername());
             RequestLocator.get().getSession().setAttribute("user", user);
-            List<Advertise> advertises = new ArrayList<Advertise>();
+            List<Advertisement> advertisements = new ArrayList<Advertisement>();
             List<Product> products = new ArrayList<Product>();
             for (Fellowship f : user.getFollowing()) {
                 debug(this, "user '"
@@ -39,12 +39,13 @@ public class IndexController extends YABAController {
                     + "' following '"
                     + f.getShop().getName()
                     + "'");
-                advertises.addAll(shopManager.getRecentAdvertises(f.getShop()));
+                advertisements.addAll(shopManager.getRecentAdvertisements(f
+                    .getShop()));
                 products.addAll(shopManager.getRecentProducts(f.getShop()));
             }
-            Collections.sort(advertises);
+            Collections.sort(advertisements);
             Collections.sort(products);
-            requestScope("advertises", advertises);
+            requestScope("advertisements", advertisements);
             requestScope("products", products);
             return forward("index.jsp");
         }

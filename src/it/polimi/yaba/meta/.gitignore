@@ -1,4 +1,3 @@
-/AdvertiseMeta.java
 /CommentMeta.java
 /CoordinateMeta.java
 /FellowshipMeta.java
@@ -16,5 +15,5 @@
 /TagMeta.java
 /TagListMeta.java
 /TagAssociationMeta.java
-/AdvertismentAssociationMeta.java
 /AdvertisedProductMeta.java
+/AdvertisementMeta.java

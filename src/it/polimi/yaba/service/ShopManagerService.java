@@ -1,7 +1,7 @@
 package it.polimi.yaba.service;
 
 import it.polimi.yaba.meta.ShopMeta;
-import it.polimi.yaba.model.Advertise;
+import it.polimi.yaba.model.Advertisement;
 import it.polimi.yaba.model.Coordinate;
 import it.polimi.yaba.model.Image;
 import it.polimi.yaba.model.Product;
@@ -123,14 +123,14 @@ public class ShopManagerService extends ModelManagerService<Shop> {
         return coordinate.getPlace().getShop();
     }
 
-    public List<Advertise> getRecentAdvertises(Shop shop) {
-        List<Advertise> advertises = shop.getAdvertises();
-        Collections.sort(advertises);
+    public List<Advertisement> getRecentAdvertisements(Shop shop) {
+        List<Advertisement> advertisements = shop.getAdvertisements();
+        Collections.sort(advertisements);
         int max = 10;
-        if (max > advertises.size()) {
-            max = advertises.size();
+        if (max > advertisements.size()) {
+            max = advertisements.size();
         }
-        return new ArrayList<Advertise>(advertises.subList(0, max));
+        return new ArrayList<Advertisement>(advertisements.subList(0, max));
     }
 
     public List<Product> getRecentProducts(Shop shop) {

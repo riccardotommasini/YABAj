@@ -1,8 +1,8 @@
 package it.polimi.yaba.service;
 
 import it.polimi.yaba.meta.AdvertisedProductMeta;
-import it.polimi.yaba.model.Advertise;
 import it.polimi.yaba.model.AdvertisedProduct;
+import it.polimi.yaba.model.Advertisement;
 import it.polimi.yaba.model.Product;
 
 import java.util.List;
@@ -38,10 +38,9 @@ public class AdvertisedProductManagerService extends
             ProductManagerService.get().select((Key) rawData.get("product"));
         advertisedProduct.getProductRef().setModel(product);
 
-        Advertise advertise =
-            AdvertiseManagerService
-                .get()
-                .select((Key) rawData.get("advertise"));
+        Advertisement advertise =
+            AdvertisementManagerService.get().select(
+                (Key) rawData.get("advertisement"));
         advertisedProduct.getAdvertiseRef().setModel(advertise);
 
         Transaction transaction = Datastore.beginTransaction();

@@ -1,4 +1,4 @@
-package it.polimi.yaba.controller.advertises;
+package it.polimi.yaba.controller.advertisements;
 
 import it.polimi.yaba.controller.YABAController;
 

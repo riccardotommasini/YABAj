@@ -4,17 +4,17 @@
 <%@taglib prefix="f" uri="http://www.slim3.org/functions"%>
 
 <jsp:include page="/common/header.jsp">
-	<jsp:param name="pageName" value="New Post" />
+	<jsp:param name="pageName" value="New Advertisement" />
 	<jsp:param name="script" value="suggest" />
 	<jsp:param name="script" value="add" />
 </jsp:include>
 
 <div class="row">
 	<div class="col-md-4 col-md-offset-4 ">
-		<form name="addProduct" action="/advertises/new" method="POST" class="form-horizontal" role="form" >
+		<form name="addProduct" action="/advertisements/new" method="POST" class="form-horizontal" role="form" >
 			<div class="form-group" align="center">
 				<div class="col-xs-12 col-md-12">
-					<h3>New Advertise:</h3>
+					<h3>New Advertisement:</h3>
 				</div>
 			</div>
 			<div class="shop-product form-group">

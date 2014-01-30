@@ -1,6 +1,6 @@
 package it.polimi.yaba.model;
 
-import it.polimi.yaba.meta.AdvertiseMeta;
+import it.polimi.yaba.meta.AdvertisementMeta;
 import it.polimi.yaba.meta.FellowshipMeta;
 import it.polimi.yaba.meta.PlaceMeta;
 import it.polimi.yaba.meta.ProductMeta;
@@ -36,10 +36,10 @@ public class Shop implements Serializable {
             this);
 
     @Attribute(persistent = false)
-    private final InverseModelListRef<Advertise, Shop> advertiseListRef =
-        new InverseModelListRef<Advertise, Shop>(
-            Advertise.class,
-            AdvertiseMeta.get().shopRef.getName(),
+    private final InverseModelListRef<Advertisement, Shop> advertisementListRef =
+        new InverseModelListRef<Advertisement, Shop>(
+            Advertisement.class,
+            AdvertisementMeta.get().shopRef.getName(),
             this);
 
     @Attribute(persistent = false)
@@ -90,12 +90,12 @@ public class Shop implements Serializable {
         return placeListRef;
     }
 
-    public List<Advertise> getAdvertises() {
-        return getAdvertiseListRef().getModelList();
+    public List<Advertisement> getAdvertisements() {
+        return getAdvertisementListRef().getModelList();
     }
 
-    public InverseModelListRef<Advertise, Shop> getAdvertiseListRef() {
-        return advertiseListRef;
+    public InverseModelListRef<Advertisement, Shop> getAdvertisementListRef() {
+        return advertisementListRef;
     }
 
     public Image getImage() {

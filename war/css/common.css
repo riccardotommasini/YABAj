@@ -9,7 +9,7 @@
 
 /*
  * ===================
- *     advertise
+ *   advertisements
  * ===================
  */
  
@@ -38,6 +38,7 @@
 .ui-autocomplete-loading {
 		background: white url('/img/ui-anim_basic_16x16.gif') right center no-repeat;
 }
+
 #canvas {
 	display: none;
 }
@@ -79,7 +80,11 @@ textarea {
  * ===================
  */
  
- #post-form {
+.following {
+	margin-top: 0 !important;	
+}
+
+#post-form {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }

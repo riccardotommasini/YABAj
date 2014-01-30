@@ -1,12 +1,12 @@
-package it.polimi.yaba.controller.advertises;
+package it.polimi.yaba.controller.advertisements;
 
 import it.polimi.yaba.controller.YABAController;
-import it.polimi.yaba.meta.AdvertiseMeta;
-import it.polimi.yaba.model.Advertise;
+import it.polimi.yaba.meta.AdvertisementMeta;
+import it.polimi.yaba.model.Advertisement;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
-import it.polimi.yaba.service.AdvertiseManagerService;
 import it.polimi.yaba.service.AdvertisedProductManagerService;
+import it.polimi.yaba.service.AdvertisementManagerService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,15 +18,15 @@ import org.slim3.controller.validator.Validators;
 import org.slim3.util.RequestLocator;
 
 public class NewController extends YABAController {
-    private static AdvertiseManagerService advertiseManager =
-        AdvertiseManagerService.get();
+    private static AdvertisementManagerService advertisementManager =
+        AdvertisementManagerService.get();
     private static AdvertisedProductManagerService advertisedProductManager =
         AdvertisedProductManagerService.get();
 
     @Override
     public Navigation run() throws Exception {
         Validators validators = new Validators(request);
-        AdvertiseMeta meta = AdvertiseMeta.get();
+        AdvertisementMeta meta = AdvertisementMeta.get();
 
         validators.add("products", validators.required());
         validators.add(meta.text, validators.required());
@@ -52,14 +52,14 @@ public class NewController extends YABAController {
         map = new HashMap<String, Object>();
         map.put("text", text);
         map.put("shop", shop.getKey());
-        Advertise advertise = advertiseManager.create(map);
-        debug(this, "advertise created");
+        Advertisement advertisement = advertisementManager.create(map);
+        debug(this, "advertisement created");
         for (Product product : advertisedProducts) {
             map = new HashMap<String, Object>();
             map.put("product", product.getKey());
-            map.put("advertise", advertise.getKey());
+            map.put("advertisement", advertisement.getKey());
             advertisedProductManager.create(map);
-            debug(this, "advertise association with '"
+            debug(this, "advertisement association with '"
                 + product.getName()
                 + "' created");
         }

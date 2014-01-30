@@ -1,8 +1,8 @@
 package it.polimi.yaba.service;
 
-import it.polimi.yaba.meta.AdvertiseMeta;
+import it.polimi.yaba.meta.AdvertisementMeta;
 import it.polimi.yaba.meta.CoordinateMeta;
-import it.polimi.yaba.model.Advertise;
+import it.polimi.yaba.model.Advertisement;
 import it.polimi.yaba.model.Coordinate;
 import it.polimi.yaba.model.Shop;
 
@@ -17,23 +17,24 @@ import org.slim3.util.BeanUtil;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
 
-public class AdvertiseManagerService extends ModelManagerService<Advertise> {
-    private static AdvertiseManagerService instance;
+public class AdvertisementManagerService extends
+        ModelManagerService<Advertisement> {
+    private static AdvertisementManagerService instance;
 
-    public static synchronized AdvertiseManagerService get() {
+    public static synchronized AdvertisementManagerService get() {
         if (instance != null) {
             return instance;
         }
-        return (instance = new AdvertiseManagerService());
+        return (instance = new AdvertisementManagerService());
     }
 
-    private AdvertiseManagerService() {
-        super(Advertise.class, AdvertiseMeta.get());
+    private AdvertisementManagerService() {
+        super(Advertisement.class, AdvertisementMeta.get());
     }
 
     @Override
-    public Advertise create(Map<String, Object> rawData) {
-        Advertise advertise = new Advertise();
+    public Advertisement create(Map<String, Object> rawData) {
+        Advertisement advertise = new Advertisement();
         BeanUtil.copy(rawData, advertise);
 
         Shop shop = ShopManagerService.get().select((Key) rawData.get("shop"));
@@ -50,12 +51,12 @@ public class AdvertiseManagerService extends ModelManagerService<Advertise> {
     }
 
     @Override
-    public List<Advertise> match(String query) {
+    public List<Advertisement> match(String query) {
         throw new RuntimeException("match method for advertise not implemented");
     }
 
     @Override
-    public List<Advertise> search(String query) {
+    public List<Advertisement> search(String query) {
         throw new RuntimeException(
             "search method for advertise not implemented");
     }

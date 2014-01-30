@@ -14,7 +14,7 @@ import org.slim3.datastore.ModelRef;
 import com.google.appengine.api.datastore.Key;
 
 @Model(schemaVersion = 1)
-public class Advertise implements Serializable, Comparable<Advertise> {
+public class Advertisement implements Serializable, Comparable<Advertisement> {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,8 +29,8 @@ public class Advertise implements Serializable, Comparable<Advertise> {
     private Date timestamp;
 
     @Attribute(persistent = false)
-    private final InverseModelListRef<AdvertisedProduct, Advertise> advertisedProductListRef =
-        new InverseModelListRef<AdvertisedProduct, Advertise>(
+    private final InverseModelListRef<AdvertisedProduct, Advertisement> advertisedProductListRef =
+        new InverseModelListRef<AdvertisedProduct, Advertisement>(
             AdvertisedProduct.class,
             AdvertisedProductMeta.get().advertiseRef.getName(),
             this);
@@ -73,7 +73,7 @@ public class Advertise implements Serializable, Comparable<Advertise> {
         return getAdvertisedProductListRef().getModelList();
     }
 
-    public InverseModelListRef<AdvertisedProduct, Advertise> getAdvertisedProductListRef() {
+    public InverseModelListRef<AdvertisedProduct, Advertisement> getAdvertisedProductListRef() {
         return advertisedProductListRef;
     }
 
@@ -104,7 +104,7 @@ public class Advertise implements Serializable, Comparable<Advertise> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Advertise other = (Advertise) obj;
+        Advertisement other = (Advertisement) obj;
         if (key == null) {
             if (other.key != null) {
                 return false;
@@ -115,7 +115,7 @@ public class Advertise implements Serializable, Comparable<Advertise> {
         return true;
     }
 
-    public int compareTo(Advertise o) {
+    public int compareTo(Advertisement o) {
         if (this.timestamp.after(o.timestamp)) {
             return -1;
         } else if (this.timestamp.after(o.timestamp)) {

@@ -27,7 +27,7 @@ $(document).ready(function() {
 				</div>
 			</form>
 			<div id="post-form" class="col-xs-12 col-md-12" align="center">
-				<a href="/advertises/add" class='btn btn-primary link'>New Advertise</a>
+				<a href="/advertisements/add" class='btn btn-primary link'>New Advertisement</a>
 				<a href="/products/add" class='btn btn-primary link'>New Product</a>
 			</div>
 		</div>
@@ -112,21 +112,21 @@ $(document).ready(function() {
 <c:if test="${  sessionScope.shop.name == shop.name }">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12">
-			<h3>Your advertises:</h3>
-			<c:if test="${ empty shop.advertises }">
-				<p><i>No advertises yet!</i></p>
+			<h3>Your advertisements:</h3>
+			<c:if test="${ empty shop.advertisements }">
+				<p><i>No advertisements yet!</i></p>
 			</c:if>
-			<c:forEach var="advertise" items="${shop.advertises}" varStatus="externalStatus">
+			<c:forEach var="advertisement" items="${shop.advertisements}" varStatus="externalStatus">
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<div class="jumbotron">
-						<p><strong><fmt:formatDate value="${advertise.timestamp}" pattern="E d MMM yyyy"/></strong></p>
+						<p><strong><fmt:formatDate value="${advertisement.timestamp}" pattern="E d MMM yyyy"/></strong></p>
 						<p>
 							<strong>Shop:</strong>
-							<a href="/shops/profile?name=${advertise.shop.name}">${advertise.shop.name}</a>
+							<a href="/shops/profile?name=${advertisement.shop.name}">${advertisement.shop.name}</a>
 						</p>
 						<div id="carousel${externalStatus.count}" class="carousel slide" style="width: 200px; margin: 0 auto">
 							<div class="carousel-inner">
-								<c:forEach var="advertisedProduct" items="${advertise.products}" varStatus="status">
+								<c:forEach var="advertisedProduct" items="${advertisement.products}" varStatus="status">
 									<c:choose>
 										<c:when test="${status.count == 1}">
 											<div class="item active">
@@ -145,7 +145,7 @@ $(document).ready(function() {
 									</div>
 								</c:forEach>
 							</div>
-							<c:if test="${fn:length(advertise.products) > 1}">
+							<c:if test="${fn:length(advertisement.products) > 1}">
 								<a class="left carousel-control" href="#carousel${externalStatus.count}" data-slide="prev">
 									<span class="glyphicon glyphicon-chevron-left"></span>
 								</a>
@@ -154,7 +154,7 @@ $(document).ready(function() {
 								</a>
 							</c:if>
 						</div>
-						<p class="description">${advertise.text}</p>
+						<p class="description">${advertisement.text}</p>
 					</div>
 				</div>
 			</c:forEach>

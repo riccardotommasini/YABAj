@@ -40,7 +40,7 @@
 			<img class="thumbnail profile-thumbnail" src="${f:url(showUrl)}" />
 		</div>
 	</c:if>
-	<div class="col-xs-12 col-md-3">
+	<div class="col-xs-12 col-md-5">
 		<p><strong>Name:</strong> ${f:h(user.name)}</p>
 		<p><strong>Surname:</strong> ${f:h(user.surname)}</p>
 		<p><strong>Username:</strong> ${f:h(user.username)}</p>
@@ -50,6 +50,20 @@
 			</c:when>
 		</c:choose>
 	</div>
+	<c:if test="${ ! empty user.following }">
+		<div class="col-xs-12 col-md-offset-2 col-md-4">
+			<h4 class="following">Following:</h4>
+			<ul>
+				<c:forEach var="fellowship" items="${user.following}">
+					<li>
+						<p><a href="/shops/profile?name=${fellowship.shop.name}">
+							${fellowship.shop.name}
+						</a></p>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</c:if>
 </div>
 <hr>
 <div class="row">
@@ -114,22 +128,5 @@
 		</div>
 	</c:forEach>
 </div>
-
-<c:if test="${ ! empty user.following }">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12" id="advertise-list">
-			<h3>Following:</h3>
-			<ul>
-				<c:forEach var="fellowship" items="${user.following}">
-					<li>
-						<p><a href="/shops/profile?name=${fellowship.shop.name}">
-							${fellowship.shop.name}
-						</a></p>
-					</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
-</c:if>
 
 <jsp:include page="/common/footer.jsp" />

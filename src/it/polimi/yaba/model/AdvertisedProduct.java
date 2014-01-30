@@ -22,8 +22,8 @@ public class AdvertisedProduct implements Serializable {
     private final ModelRef<Product> productRef = new ModelRef<Product>(
         Product.class);
 
-    private final ModelRef<Advertise> advertiseRef = new ModelRef<Advertise>(
-        Advertise.class);
+    private final ModelRef<Advertisement> advertiseRef =
+        new ModelRef<Advertisement>(Advertisement.class);
 
     public Key getKey() {
         return key;
@@ -49,11 +49,11 @@ public class AdvertisedProduct implements Serializable {
         return productRef;
     }
 
-    public Advertise getAdvertise() {
+    public Advertisement getAdvertise() {
         return getAdvertiseRef().getModel();
     }
 
-    public ModelRef<Advertise> getAdvertiseRef() {
+    public ModelRef<Advertisement> getAdvertiseRef() {
         return advertiseRef;
     }
 

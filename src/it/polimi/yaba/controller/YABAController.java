@@ -15,7 +15,7 @@ import org.slim3.controller.validator.Errors;
 public abstract class YABAController extends Controller {
 
     private static ErrorQueueService errorQueue = ErrorQueueService.get();
-    private static final boolean DEPLOY = false;
+    protected static final boolean DEPLOY = false;
 
     protected boolean requestParameterExists(String name) {
         return (request.getParameter(name) != null);

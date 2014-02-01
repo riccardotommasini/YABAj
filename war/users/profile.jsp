@@ -93,16 +93,8 @@
 		<div class="col-xs-12 col-sm-6 col-md-3">
 			<div class="jumbotron">
 				<p><strong><fmt:formatDate value="${post.timestamp}" pattern="E d MMM yyyy"/></strong></p>
-				<p><strong>Product:</strong>
-					<c:choose>
-						<c:when test="${post.product.shop != null}">
-							<a href="/shops/profile?name=${f:h(post.product.shop.name)}">
-								${f:h(post.product.name)}</a>
-						</c:when>
-						<c:otherwise>
-							${f:h(post.product.name)}
-						</c:otherwise>
-					</c:choose>
+				<p>
+					${f:h(post.product.name)}
 				</p>
 				<c:if test="${post.image != null}">
 					<div align="center">
@@ -120,7 +112,11 @@
 						</p>
 					</c:when>
 					<c:otherwise>
-						<p><strong>At place:</strong> ${f:h(post.place.name)}</p>
+						<p>
+							<strong>At shop:</strong>
+							<a href="/places/search?name=${f:h(post.place.name)}">
+								${f:h(post.place.name)} </a>
+						</p>
 					</c:otherwise>
 				</c:choose>
 				<p><strong>With message:</strong> ${f:h(post.text)}</p>

@@ -12,9 +12,18 @@
 		<form name="addAccount" action="/login/login" method="POST" class="form-horizontal" role="form">
 			<div class="form-group" align="center">
 				<div class="col-xs-12 col-md-12">
-					<a href='https://www.facebook.com/dialog/oauth?client_id=639186146139919&redirect_uri=http://localhost:8888/login/fblogin&scope=email,read_stream'>
-						<img src="/img/fblogin.png" alt="Login">
-					</a>
+					<c:choose>
+						<c:when test="${deploy == true}">
+							<a href='https://www.facebook.com/dialog/oauth?client_id=639186146139919&redirect_uri=http://yaba-dmw.appspot.com/login/fblogin&scope=email,read_stream'>
+								<img src="/img/fblogin.png" alt="Login">
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href='https://www.facebook.com/dialog/oauth?client_id=639186146139919&redirect_uri=http://localhost:8888/login/fblogin&scope=email,read_stream'>
+								<img src="/img/fblogin.png" alt="Login">
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<hr>

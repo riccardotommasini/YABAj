@@ -8,6 +8,9 @@ public class IndexController extends YABAController {
 
     @Override
     public Navigation run() throws Exception {
+        if (DEPLOY) {
+            requestScope("deploy", true);
+        }
         return forward("index.jsp");
     }
 }

@@ -9,45 +9,86 @@
 </jsp:include>
 
 <c:if test="${ ! empty products }">
-	<fmt:formatNumber var="numRows" value="${fn:length(products) div 4 + (fn:length(products) mod 4)}"  maxFractionDigits="0"/>
-	<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
-	<c:set var="index" value="1" />
-	<c:forEach begin="1" end="${numRows}" var="i">
-		<div class="row">
-			<c:forEach begin="${index}" end="${index + 3}" var="product" items="${products}" varStatus="status">
-				<div class="col-xs-12 col-sm-6 col-md-3">
-					<div class="jumbotron">
-						<p>
-							${product.name}
-						</p>
-						<c:if test="${product.shop != null }">
-							<p>
-								<strong>Shop:</strong>
-								<a href="/shops/profile?name=${product.shop.name}">${product.shop.name}</a>
-							</p>
-						</c:if>
-						<c:if test="${product.image != null}">
-							<div align="center">
-								<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
-								<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
-							</div>
-						</c:if>
-						<c:choose>
-							<c:when test="${ ! empty product.tags  }">
-								<p>
-									<strong>Tags:</strong>
-									<c:forEach var="tagAssociation" items="${product.tags}">
-										<a href="/tags/search?name=${tagAssociation.tag.name}">${tagAssociation.tag.name}</a>
-									</c:forEach>
-								</p>
-							</c:when>
-						</c:choose>
-					</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<fmt:formatNumber var="numRows" value="${fn:length(products) div 4 + (fn:length(products) mod 4)}"  maxFractionDigits="0"/>
+			<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
+			<c:set var="index" value="1" />
+			<c:forEach begin="1" end="${numRows}" var="i">
+				<div class="row">
+					<c:choose>
+						<c:when test="${fn:length(products) <= 4}">
+							<c:forEach var="product" items="${products}" varStatus="status">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="jumbotron">
+										<p>
+											${product.name}
+										</p>
+										<c:if test="${product.shop != null }">
+											<p>
+												<strong>Shop:</strong>
+												<a href="/shops/profile?name=${product.shop.name}">${product.shop.name}</a>
+											</p>
+										</c:if>
+										<c:if test="${product.image != null}">
+											<div align="center">
+												<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
+												<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
+											</div>
+										</c:if>
+										<c:choose>
+											<c:when test="${ ! empty product.tags  }">
+												<p>
+													<strong>Tags:</strong>
+													<c:forEach var="tagAssociation" items="${product.tags}">
+														<a href="/tags/search?name=${tagAssociation.tag.name}">${tagAssociation.tag.name}</a>
+													</c:forEach>
+												</p>
+											</c:when>
+										</c:choose>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach begin="${index}" end="${index + 3}" var="product" items="${products}" varStatus="status">
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="jumbotron">
+										<p>
+											${product.name}
+										</p>
+										<c:if test="${product.shop != null }">
+											<p>
+												<strong>Shop:</strong>
+												<a href="/shops/profile?name=${product.shop.name}">${product.shop.name}</a>
+											</p>
+										</c:if>
+										<c:if test="${product.image != null}">
+											<div align="center">
+												<c:set var="showUrl" value="/show?key=${f:h(product.image.key)}&version=1" />
+												<img class="thumbnail big-thumbnail" src="${f:url(showUrl)}" />
+											</div>
+										</c:if>
+										<c:choose>
+											<c:when test="${ ! empty product.tags  }">
+												<p>
+													<strong>Tags:</strong>
+													<c:forEach var="tagAssociation" items="${product.tags}">
+														<a href="/tags/search?name=${tagAssociation.tag.name}">${tagAssociation.tag.name}</a>
+													</c:forEach>
+												</p>
+											</c:when>
+										</c:choose>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					<c:set var="index" value="${index + 3}" />
 				</div>
 			</c:forEach>
-			<c:set var="index" value="${index + 3}" />
 		</div>
-	</c:forEach>
+	</div>
 </c:if>
 
 <c:if test="${ ! empty places }">

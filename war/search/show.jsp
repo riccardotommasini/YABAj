@@ -9,10 +9,12 @@
 </jsp:include>
 
 <c:if test="${ ! empty products }">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
-			<c:forEach var="product" items="${products}">
+	<fmt:formatNumber var="numRows" value="${fn:length(products) div 4 + (fn:length(products) mod 4)}"  maxFractionDigits="0"/>
+	<h3 class="title">Products <span class="badge">${fn:length(products)}</span></h3>
+	<c:set var="index" value="1" />
+	<c:forEach begin="1" end="${numRows}" var="i">
+		<div class="row">
+			<c:forEach begin="${index}" end="${index + 3}" var="product" items="${products}" varStatus="status">
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<div class="jumbotron">
 						<p>
@@ -43,8 +45,9 @@
 					</div>
 				</div>
 			</c:forEach>
+			<c:set var="index" value="${index + 3}" />
 		</div>
-	</div>
+	</c:forEach>
 </c:if>
 
 <c:if test="${ ! empty places }">

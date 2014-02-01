@@ -89,7 +89,7 @@ public class ShopManagerService extends ModelManagerService<Shop> {
     public JSONObject generateJson(Object obj) {
         JSONObject json = new JSONObject();
         Shop shop = (Shop) obj;
-        json.put("type", shop.getClass().getSimpleName());
+        // json.put("type", shop.getClass().getSimpleName());
         json.put("name", shop.getName());
         return json;
     }

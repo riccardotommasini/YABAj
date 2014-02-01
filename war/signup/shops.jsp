@@ -47,7 +47,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div id="checkbox-container" class="col-xs-12 col-md-12"></div>
+				<div class="col-xs-12 col-md-12">
+					<input type="text" name="latitude" id="input-latitude" class="form-control" placeholder="Latitude"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-md-12">
+					<input type="text" name="longitude" id="input-longitude" class="form-control" placeholder="Longitude"/>
+				</div>
 			</div>
 			<div class="form-group" align="center">
 				<div class="col-xs-12 col-md-12">

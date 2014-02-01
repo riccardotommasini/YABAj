@@ -16,7 +16,7 @@
 
 <div class="row">
 	<div class="col-xs-12 col-md-offset-3 col-md-6">
-		<div class="alert alert-warning alert-dismissable">
+		<div class="alert alert-warning alert-dismissable" align="center">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<strong>Warning!</strong> This shop is not trusted, all content you see is user provided.
 		</div>

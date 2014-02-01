@@ -83,7 +83,7 @@ public class PlaceManagerService extends ModelManagerService<Place> {
     public JSONObject generateJson(Object obj) {
         JSONObject json = new JSONObject();
         Place place = (Place) obj;
-        json.put("type", place.getClass().getSimpleName());
+        // json.put("type", place.getClass().getSimpleName());
         json.put("name", place.getName());
         return json;
     }

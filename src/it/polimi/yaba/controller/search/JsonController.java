@@ -1,6 +1,7 @@
 package it.polimi.yaba.controller.search;
 
 import it.polimi.yaba.controller.YABAController;
+import it.polimi.yaba.model.Place;
 import it.polimi.yaba.model.Product;
 import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.service.ModelManagerService;
@@ -32,24 +33,33 @@ public class JsonController extends YABAController {
         debug(this, "query for '" + type + "' recived: '" + query + "'");
 
         JSONArray suggestions = new JSONArray();
-        if (type.equals("post")) {
-            manager = ShopManagerService.get();
-            suggestions.addAll(performSearch(query));
+        if (type.equals("shop")) {
+            Set<JSONObject> results = new HashSet<JSONObject>();
+            JSONObject json;
 
-            Set<JSONObject> placeResults = new HashSet<JSONObject>();
-            manager = PlaceManagerService.get();
-            placeResults.addAll(performSearch(query));
-            suggestions.addAll(placeResults);
+            List<Shop> shops = new ArrayList<Shop>();
+            shops.addAll(ShopManagerService.get().search(query));
+            for (Shop s : shops) {
+                json = new JSONObject();
+                json.put("name", s.getName());
+                results.add(json);
+            }
+
+            List<Place> places = new ArrayList<Place>();
+            places.addAll(PlaceManagerService.get().search(query));
+            for (Place p : places) {
+                json = new JSONObject();
+                json.put("name", p.getName());
+                results.add(json);
+            }
+
+            suggestions.addAll(results);
         } else if (type.equals("product")) {
-            Set<JSONObject> productResults = new HashSet<JSONObject>();
             manager = ProductManagerService.get();
-            productResults.addAll(performSearch(query));
-            suggestions.addAll(productResults);
+            suggestions.addAll(performSearch(query));
         } else if (type.equals("tag")) {
-            Set<JSONObject> tagResults = new HashSet<JSONObject>();
             manager = TagManagerService.get();
-            tagResults.addAll(performSearch(query));
-            suggestions.addAll(tagResults);
+            suggestions.addAll(performSearch(query));
         } else if (type.equals("shopProducts")) {
             Shop shop =
                 (Shop) RequestLocator.get().getSession().getAttribute("shop");

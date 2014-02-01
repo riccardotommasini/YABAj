@@ -2,8 +2,10 @@ package it.polimi.yaba.controller.signup;
 
 import it.polimi.yaba.controller.YABAController;
 import it.polimi.yaba.model.Image;
+import it.polimi.yaba.model.Place;
 import it.polimi.yaba.model.Shop;
 import it.polimi.yaba.model.User;
+import it.polimi.yaba.service.CoordinateManagerService;
 import it.polimi.yaba.service.ImageManagerService;
 import it.polimi.yaba.service.PlaceManagerService;
 import it.polimi.yaba.service.ShopManagerService;
@@ -21,6 +23,8 @@ public class NewController extends YABAController {
     private static ShopManagerService shopManager = ShopManagerService.get();
     private static UserManagerService userManager = UserManagerService.get();
     private static PlaceManagerService placeManager = PlaceManagerService.get();
+    private static CoordinateManagerService coordinateManager =
+        CoordinateManagerService.get();
     private static ImageManagerService imageManager = new ImageManagerService();
 
     @Override
@@ -86,6 +90,8 @@ public class NewController extends YABAController {
             validators.add("email", validators.required());
             validators.add("password", validators.required());
             validators.add("password-confirm", validators.required());
+            validators.add("latitude", validators.required());
+            validators.add("longitude", validators.required());
 
             if (!validators.validate()) {
                 return reportValidationErrors(validators.getErrors());
@@ -122,7 +128,12 @@ public class NewController extends YABAController {
             rawData = new HashMap<String, Object>();
             rawData.put("name", name);
             rawData.put("shop", shop.getKey());
-            placeManager.create(rawData);
+            Place place = placeManager.create(rawData);
+            rawData = new HashMap<String, Object>();
+            rawData.put("latitude", asFloat("latitude"));
+            rawData.put("longitude", asFloat("longitude"));
+            rawData.put("place", place.getKey());
+            coordinateManager.create(rawData);
 
             RequestLocator.get().getSession().setAttribute("shop", shop);
             debug(this, "session for shop '" + shop.getName() + "' setted");

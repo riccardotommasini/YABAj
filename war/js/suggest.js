@@ -3,12 +3,12 @@ $(document).ready(function() {
 	$("#input-shop").autocomplete({
 		source: function( request, response ) {
 			$.ajax({
-				url: "/search/json?type=post&query=" + $("#input-shop").val(),
+				url: "/search/json?type=shop&query=" + $("#input-shop").val(),
 				dataType: "json",
 				success: function (data) {
 					response( $.map( data, function(item) {
 			            return {
-			            	label: item.type + ": " + item.name,
+			            	label: item.name,
 				            value: item.name
 			            }
 			        }));
@@ -32,7 +32,7 @@ $(document).ready(function() {
 				success: function (data) {
 					response( $.map( data, function(item) {
 			            return {
-				            label: item.type + ": " + item.name,
+				            label: item.name,
 				            value: item.name
 			            }
 			        }));

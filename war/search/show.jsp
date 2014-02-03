@@ -84,7 +84,7 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<c:set var="index" value="${index + 3}" />
+					<c:set var="index" value="${index + 4}" />
 				</div>
 			</c:forEach>
 		</div>

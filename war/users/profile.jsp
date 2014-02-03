@@ -40,7 +40,7 @@
 			<img class="thumbnail profile-thumbnail" src="${f:url(showUrl)}" />
 		</div>
 	</c:if>
-	<div class="col-xs-12 col-md-5">
+	<div class="col-xs-12 col-md-6">
 		<p><strong>Name:</strong> ${f:h(user.name)}</p>
 		<p><strong>Surname:</strong> ${f:h(user.surname)}</p>
 		<p><strong>Username:</strong> ${f:h(user.username)}</p>
@@ -51,7 +51,7 @@
 		</c:choose>
 	</div>
 	<c:if test="${ ! empty user.following }">
-		<div class="col-xs-12 col-md-offset-2 col-md-4">
+		<div class="col-xs-12 col-md-3">
 			<h4 class="following">Following:</h4>
 			<ul>
 				<c:forEach var="fellowship" items="${user.following}">
